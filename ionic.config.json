@@ -1,0 +1,8 @@
+{
+  "name": "jepang",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "bd2fce31"
+}
