@@ -1,0 +1,184 @@
+.button-menu {
+  background-color: transparent !important;
+  color: rgb(188, 0, 45);
+}
+.custom-header {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 6px rgba(177, 3, 3, 0.1) !important;
+}
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  cursor: pointer;
+  position: relative; // Menambahkan posisi relatif untuk menampung overlay
+  transition: background-color 0.3s ease;
+
+  ion-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1); // Warna latar saat hover
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2); // Warna overlay
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1; // Tampilkan overlay saat hover
+  }
+}
+
+.custom-icon-menu {
+  width: 40px;
+  height: 40px;
+  object-fit: contain; // Agar gambar tetap proporsional
+}
+
+.custom-button-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #d3000059;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  text-decoration: none; // Menghapus garis bawah pada link
+  color: inherit; // Mewarisi warna teks dari parent
+}
+
+/* Mengatur warna ikon tab yang aktif */
+ion-tab-button.tab-selected ion-icon {
+  color: #b90404 !important; // Putih
+}
+
+/* Mengatur warna label tab yang aktif */
+ion-tab-button.tab-selected ion-label {
+  color: #b90404 !important; // Putih
+}
+.large-rounded-tab {
+  width: 80px;
+  height: 80px;
+  border-radius: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: rgb(188, 0, 44);
+  border: 5px solid rgba(188, 0, 44, 0.596);
+  position: relative;
+}
+
+.icon-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2; // Menjadikan ikon QRIS muncul di atas tab
+}
+
+.icon-menu-img {
+  background-color: #fff; // Membuat ikon QRIS memiliki latar belakang putih untuk kontras
+  padding: 10px;
+  border-radius: 50%; // Membuat ikon QRIS menjadi bulat
+}
+
+.large-rounded-tab .ion-label {
+  margin-top: 10px; // Menambahkan sedikit ruang antara ikon dan label
+}
+
+.custom-judul-line {
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  background-color: #b90404;
+  padding: 2px;
+  margin-bottom: 20px;
+}
+
+.custom-list ion-item {
+  display: flex;
+  justify-content: space-between; /* Memisahkan item dan konten lainnya */
+  align-items: center; /* Memposisikan konten di tengah secara vertikal */
+}
+
+.custom-list .item-number {
+  font-weight: bold;
+  margin-right: 13px; /* Menambahkan jarak antara nomor dan label */
+}
+
+.custom-list .item-score {
+  font-weight: bold;
+  margin-left: 10px; /* Menambahkan jarak antara label dan skor */
+}
+
+.custom-list .item-label {
+  flex-grow: 1; /* Membuat label mengisi ruang yang tersedia */
+  margin-right: 10px; /* Menambahkan jarak sebelum skor */
+}
+
+.custom-icon-leaderboard {
+  width: 25px !important;
+  margin-right: 15px;
+}
+
+.menu-item {
+  display: flex;
+  padding: 10px;
+  color: #000;
+}
+
+.menu-icon {
+  margin-right: 10px;
+  font-size: 10px;
+}
+
+.menu-label {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.Kanji {
+  font-size: 60px;
+}
+
+ion-content {
+  --background: #f4f4f4;
+}
+.custom-forum-image {
+  border-radius: 50%;
+}
+.custom-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.custom-button-selengkapnya {
+  background-color: transparent !important;
+  margin: 10px;
+}

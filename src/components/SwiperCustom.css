@@ -1,0 +1,15 @@
+.custom-swiper-news {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.custom-swiper-news img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    min-height: 200px;
+    /* border-radius: 20px; */
+
+}

@@ -1,0 +1,53 @@
+.custom-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px 0;
+  }
+  
+  .footer-item {
+    flex: 1; /* Ini membuat setiap item mengisi ruang yang sama */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .footer-item img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .footer-item span {
+    font-size: 12px;
+  }
+  
+  .footer-item.leaderboard {
+    position: relative;
+    margin-top: -80px; /* Sesuaikan nilai negatif ini untuk menyesuaikan posisi */
+  }
+  
+  
+  .footer-item.leaderboard .icon-wrapper {
+    display: flex;
+    justify-content: center; /* Memposisikan konten di tengah secara horizontal */
+    align-items: center; /* Memposisikan konten di tengah secara vertikal */
+    background-color: #ca1616; /* Warna latar menonjol */
+    border-radius: 50%; /* Membuat bulat */
+    width: 80px; /* Ukuran yang diinginkan */
+    height: 80px; /* Ukuran yang diinginkan */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Efek bayangan */
+  }
+  
+  .footer-item.leaderboard .icon-wrapper img {
+    width: 24px; /* Sesuaikan ukuran ikon */
+    height: 24px;
+  }
+  
+  
+  
+  
+  
