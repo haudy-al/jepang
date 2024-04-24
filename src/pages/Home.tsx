@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
                     <p>Kotoba</p>
                   </a>
                 </IonCol>
-                <IonCol className="menu-item" onClick={() => console.log('Ujian clicked')}>
+                <IonCol className="menu-item" onClick={() => history.push('/ujian')}>
                   <a className="custom-button-menu" href="">
                     <img className="custom-icon-menu" src={logo_ujian}></img>
                     <p>Ujian</p>
@@ -144,10 +144,10 @@ const HomePage: React.FC = () => {
 
           <IonCard>
             <div className='custom-button-container'>
-              <button className='custom-button-selengkapnya'>Selengkapnya</button>
+              <button className='custom-button-selengkapnya' onClick={() => history.push('/forum')}>Selengkapnya</button>
             </div>
             <IonList>
-              <IonItem>
+              <IonItem onClick={() => history.push('/kanji')}>
                 <IonThumbnail slot="start">
                   <img className='custom-forum-image' alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
                 </IonThumbnail>

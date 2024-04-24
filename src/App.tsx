@@ -31,6 +31,10 @@ import Leaderboard from './pages/Leaderboard';
 import ViewKanji from './pages/ViewKanji';
 import GradeKanji from './components/GradeKanji';
 import ShowKanji from './components/ShowKanji';
+import ViewForum from './components/ViewForum';
+import ForumDetailPage from './components/ForumDetailPage';
+import UjianPage from './pages/UjianPage';
+import ViewUjian from './components/ViewUjian';
 
 
 setupIonicReact();
@@ -40,6 +44,7 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/login" component={LoginPage} exact />
           <PrivateRoute path="/home" component={HomePage} exact />
           <PrivateRoute path="/search" component={ViewSearch} exact />
@@ -47,7 +52,11 @@ const App: React.FC = () => {
           <PrivateRoute path="/kanji" component={ViewKanji} exact />
           <PrivateRoute path="/kanji/:grade" component={GradeKanji} exact />
           <PrivateRoute path="/kanji/:grade/:kanji" component={ShowKanji} exact />
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <PrivateRoute path="/forum" component={ViewForum} exact />
+          <PrivateRoute path="/forum/:id" component={ForumDetailPage} exact />
+          <PrivateRoute path="/ujian" component={UjianPage} exact />
+          <PrivateRoute path="/ujian/:id" component={ViewUjian} exact />
+
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
