@@ -9,13 +9,16 @@ import axios from 'axios';
 
 const ViewUjian: React.FC = () => {
     const history = useHistory();
-    const [selectedAnswers, setSelectedAnswers] = useState({});
-
+    const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: string }>({});
 
     interface Params {
         id: string;
     }
 
+    interface UserAnswer {
+        soalId: number;
+        jawaban: string;
+    }
     const { id } = useParams<Params>();
 
     const soal = [
@@ -45,13 +48,13 @@ const ViewUjian: React.FC = () => {
         // Tambahkan soal lainnya di sini
     ];
 
-    const handleSelect = (soalId, value) => {
+    const handleSelect = (soalId: number, value: string) => {
         setSelectedAnswers(prev => ({ ...prev, [soalId]: value }));
     };
 
     const handleSubmit = () => {
         let correctAnswers = 0;
-        const userAnswers = [];
+        const userAnswers: UserAnswer[] = []; // Use the interface here
         soal.forEach(s => {
             const userAnswer = selectedAnswers[s.id];
             if (userAnswer === s.jawaban) {
