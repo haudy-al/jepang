@@ -55,7 +55,7 @@ const App: React.FC = () => {
           <PrivateRoute path="/forum" component={ViewForum} exact />
           <PrivateRoute path="/forum/:id" component={ForumDetailPage} exact />
           <PrivateRoute path="/ujian" component={UjianPage} exact />
-          <PrivateRoute path="/ujian/:id" component={ViewUjian} exact />
+          <PrivateRoute path="/ujian/:id/:token/:expiredDate" component={ViewUjian} exact />
 
         </IonRouterOutlet>
       </IonReactRouter>

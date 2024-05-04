@@ -4,5 +4,11 @@
     "capacitor": {}
   },
   "type": "react-vite",
-  "id": "bd2fce31"
+  "id": "bd2fce31",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://api.haudy.my.id"
+    }
+  ]
 }

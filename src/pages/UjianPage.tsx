@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonAlert } from '@ionic/react';
+import React, { useState, useEffect } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonAlert, IonToast } from '@ionic/react';
 import { format } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz'; 
 import { useHistory } from 'react-router-dom';
 
 import './HomePage.scss';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
+import { user } from '../data/user';
+import axios from 'axios';
+
 
 const UjianPage: React.FC = () => {
     const history = useHistory();
     const [showAlert, setShowAlert] = useState(false);
     const [selectedId, setSelectedId] = useState<number | null>(null);
+    const [userData, setUserData] = useState<any>(null);
+    const [showToast, setShowToast] = useState<boolean>(false);
+    const [toastMessage, setToastMessage] = useState<string>('');
+
 
     const [items, setItems] = useState([
         { id: 1, title: "Judul Item 1", date: new Date("2023-01-01T14:00:00"), imageUrl: "https://via.placeholder.com/150" },
@@ -47,21 +55,71 @@ const UjianPage: React.FC = () => {
                 }
                 return updatedItems;
             });
-            
+
         }, 500);
     };
 
-   const goToUjian = (id: number) => {
-        setSelectedId(id); // Simpan id yang dipilih
-        setShowAlert(true); // Tampilkan modal konfirmasi
+    const UjianToken = async (ujian_id: number, user_id: number) => {
+   
+        try {
+            const response = await axios.get(`https://api.haudy.my.id/api/ujian-token/${ujian_id}/${user_id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key':'dewa'
+                },
+            });
+    
+            return response.data;
+            
+        } catch (error) {
+            console.log(error);
+            setToastMessage('Error...');
+            setShowToast(true);
+            return null;
+        }
     };
 
-    const confirmGoToUjian = () => {
-        if (selectedId !== null) {
-            history.push(`/ujian/${selectedId}`);
-        }
-        setShowAlert(false); // Tutup modal setelah konfirmasi
+    const goToUjian = (id: number) => {
+        setSelectedId(id);
+        setShowAlert(true); 
     };
+
+    function encodeDateToURL(date: Date): string {
+        // Mengubah waktu lokal ke UTC+7 (Jakarta)
+        const jakartaDate = toZonedTime(date, 'Asia/Jakarta');
+        // Format the date to string and then encode
+        return encodeURIComponent(format(jakartaDate, 'yyyy-MM-dd HH:mm:ss'));
+    }
+    
+    function decodeDateFromURL(dateStr: string) {
+        // Decode tanggal dari URL
+        var decodedDate = decodeURIComponent(dateStr);
+        // Ubah kembali menjadi objek tanggal
+        return new Date(decodedDate);
+    }
+
+    const confirmGoToUjian = async () => {
+        const tokenResponse = await UjianToken(selectedId!, userData.id);
+        const token = tokenResponse.token;
+        const expired = encodeDateToURL(new Date(tokenResponse.expired));
+        if (selectedId !== null) {
+        
+            history.push(`/ujian/${selectedId}/${token}/${expired}`);
+
+            // console.log(decodeDateFromURL(encodeDateToURL(new Date(tokenResponse.expired))));
+            
+        }
+        setShowAlert(false);
+    };
+
+   
+    useEffect(() => {
+        const fetchData = async () => {
+            const userData = await user();
+            setUserData(userData);
+        };
+        fetchData();
+    }, []);
 
     return (
         <>
@@ -102,6 +160,12 @@ const UjianPage: React.FC = () => {
                             loadingText="Loading more items...">
                         </IonInfiniteScrollContent>
                     </IonInfiniteScroll>
+                    <IonToast
+                        isOpen={showToast}
+                        onDidDismiss={() => setShowToast(false)}
+                        message={toastMessage}
+                        duration={2000}
+                    ></IonToast>
                 </IonContent>
                 <Footer />
             </IonPage>
