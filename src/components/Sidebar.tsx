@@ -6,6 +6,8 @@ import { exitOutline, home, homeOutline, informationCircleOutline, leafOutline, 
 
 import logo_mahkota from '../assets/images/mahkota.png';
 import "../pages/HomePage.scss";
+import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
+
 
 
 
@@ -15,7 +17,8 @@ const Sidebar: React.FC = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('jwtToken');
-        history.push('/login');
+        GoogleAuth.signOut();
+        window.location.href = '/login';
     };
 
     return (

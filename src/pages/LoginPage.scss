@@ -2,10 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  align-items: center; /* Menengahkan secara horizontal */
   height: 100vh; // Mengisi seluruh tinggi viewport
   background-color: #ff0000; // Merah
   color: #ffffff; // Putih
-  align-items: center; /* Menengahkan secara horizontal */
 }
 
 .login-container {
@@ -17,15 +17,29 @@
   background-color: rgba(255, 255, 255, 0.9); // Transparan putih
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Bayangan ringan
   margin: auto; // Menengahkan container
- 
- margin-top: 10%;
+
+  // margin-top: 10%;
+  margin-bottom: 10%;
+}
+.image-container {
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: transparent; // Transparan putih
+  margin: auto; // Menengahkan container
+  margin-top: 5%;
+  display: flex;
+  justify-content: center; // Menengahkan secara horizontal
+  margin-bottom: -30px;
 }
 
 .app-logo {
-  width: 180px;
+  width: 100px;
   height: 100px;
   margin-bottom: 20px;
-  border: #000 solid 1px;
+  // border: #000 solid 1px;
 }
 
 .login-input {
@@ -46,10 +60,12 @@
 
 .login-button {
   margin-top: 20px;
+  margin-bottom: 20px;
   background-color: rgb(188, 0, 45) !important;
   color: #ffffff; // Putih
   border-radius: 4px;
   padding: 10px;
+
   font-weight: bold;
   transition: background-color 0.3s ease; // Transisi saat hover
 }
@@ -60,4 +76,11 @@
     0,
     25
   ) !important; // Merah yang sedikit lebih gelap saat hover
+}
+.standing-image {
+  width: 200px;
+  display: flex;
+  /* Menengahkan secara horizontal */
+
+  z-index: 1; /* Pastikan z-index lebih tinggi dari elemen lain */
 }

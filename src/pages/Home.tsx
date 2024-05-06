@@ -148,17 +148,13 @@ const HomePage: React.FC = () => {
             </div>
             <IonList>
               <IonItem onClick={() => history.push('/kanji')}>
-                <IonThumbnail slot="start">
-                  <img className='custom-forum-image' alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-                </IonThumbnail>
+                
                 <IonLabel>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur sint </IonLabel>
                 <span slot='end'><IonIcon icon={repeatOutline}></IonIcon> 2</span>
               </IonItem>
 
               <IonItem>
-                <IonThumbnail slot="start">
-                  <img className='custom-forum-image' alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-                </IonThumbnail>
+                
                 <IonLabel>Item</IonLabel>
                 <span slot='end'><IonIcon icon={repeatOutline}></IonIcon> 1</span>
               </IonItem>

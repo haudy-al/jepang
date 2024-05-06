@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonAlert, IonToast } from '@ionic/react';
-import { format } from 'date-fns';
-import { toZonedTime } from 'date-fns-tz'; 
-import { useHistory } from 'react-router-dom';
 
-import './HomePage.scss';
-import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
+
+import React, { useState, useEffect } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonModal, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/react';
+import { format } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
+import { useHistory } from 'react-router-dom';
 import { user } from '../data/user';
 import axios from 'axios';
-
+import { useToast } from '../components/ToastCustom';
+import Footer from '../components/Footer';
+import Sidebar from '../components/Sidebar';
 
 const UjianPage: React.FC = () => {
     const history = useHistory();
-    const [showAlert, setShowAlert] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [selectedId, setSelectedId] = useState<number | null>(null);
     const [userData, setUserData] = useState<any>(null);
-    const [showToast, setShowToast] = useState<boolean>(false);
-    const [toastMessage, setToastMessage] = useState<string>('');
-
+    const showToastWithColor = useToast();
 
     const [items, setItems] = useState([
         { id: 1, title: "Judul Item 1", date: new Date("2023-01-01T14:00:00"), imageUrl: "https://via.placeholder.com/150" },
@@ -48,71 +46,48 @@ const UjianPage: React.FC = () => {
     const loadData = () => {
         setTimeout(() => {
             const newItems = items.slice(displayItems.length, displayItems.length + 8);
-            setDisplayItems(prevDisplayItems => {
-                const updatedItems = [...prevDisplayItems, ...newItems];
-                if (updatedItems.length >= items.length) {
-                    setIsInfiniteDisabled(true);
-                }
-                return updatedItems;
-            });
-
+            setDisplayItems(prevDisplayItems => [...prevDisplayItems, ...newItems]);
+            if (displayItems.length >= items.length) {
+                setIsInfiniteDisabled(true);
+            }
         }, 500);
     };
 
     const UjianToken = async (ujian_id: number, user_id: number) => {
-   
         try {
             const response = await axios.get(`https://api.haudy.my.id/api/ujian-token/${ujian_id}/${user_id}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key':'dewa'
+                    'x-api-key': 'dewa'
                 },
             });
-    
             return response.data;
-            
         } catch (error) {
             console.log(error);
-            setToastMessage('Error...');
-            setShowToast(true);
             return null;
         }
     };
 
     const goToUjian = (id: number) => {
         setSelectedId(id);
-        setShowAlert(true); 
+        setShowModal(true);
     };
-
-    function encodeDateToURL(date: Date): string {
-        // Mengubah waktu lokal ke UTC+7 (Jakarta)
-        const jakartaDate = toZonedTime(date, 'Asia/Jakarta');
-        // Format the date to string and then encode
-        return encodeURIComponent(format(jakartaDate, 'yyyy-MM-dd HH:mm:ss'));
-    }
-    
-    function decodeDateFromURL(dateStr: string) {
-        // Decode tanggal dari URL
-        var decodedDate = decodeURIComponent(dateStr);
-        // Ubah kembali menjadi objek tanggal
-        return new Date(decodedDate);
-    }
 
     const confirmGoToUjian = async () => {
-        const tokenResponse = await UjianToken(selectedId!, userData.id);
-        const token = tokenResponse.token;
-        const expired = encodeDateToURL(new Date(tokenResponse.expired));
-        if (selectedId !== null) {
-        
-            history.push(`/ujian/${selectedId}/${token}/${expired}`);
-
-            // console.log(decodeDateFromURL(encodeDateToURL(new Date(tokenResponse.expired))));
-            
+        try {
+            const tokenResponse = await UjianToken(selectedId!, userData.id);
+            const token = tokenResponse.token;
+            const expired = toZonedTime(new Date(tokenResponse.expired), 'Asia/Jakarta');
+            if (selectedId !== null) {
+                history.push(`/ujian/${selectedId}/${token}/${encodeURIComponent(format(expired, 'yyyy-MM-dd HH:mm:ss'))}`);
+            }
+            setShowModal(false);
+        } catch (error) {
+            showToastWithColor("Terjadi Kesalahan di sisi server", "danger");
+            setShowModal(false);
         }
-        setShowAlert(false);
     };
 
-   
     useEffect(() => {
         const fetchData = async () => {
             const userData = await user();
@@ -152,7 +127,6 @@ const UjianPage: React.FC = () => {
                             loadData();
                             setTimeout(() => ev.target.complete(), 500);
                         }}
-
                         threshold="100px"
                         disabled={isInfiniteDisabled}>
                         <IonInfiniteScrollContent
@@ -160,37 +134,43 @@ const UjianPage: React.FC = () => {
                             loadingText="Loading more items...">
                         </IonInfiniteScrollContent>
                     </IonInfiniteScroll>
-                    <IonToast
-                        isOpen={showToast}
-                        onDidDismiss={() => setShowToast(false)}
-                        message={toastMessage}
-                        duration={2000}
-                    ></IonToast>
                 </IonContent>
                 <Footer />
+                <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+                    <IonContent>
+                        {/* <div>
+                            <p>Apakah anda yakin ingin memulai ujian?</p>
+                            <ul>
+                                <li>Pastikan Anda menyelesaikan ujian selama waktu yang masih ada.</li>
+                                <li>Jika waktu habis, jawaban Anda tidak akan terkirim.</li>
+                            </ul>
+                            <IonButton onClick={() => {
+                                confirmGoToUjian();
+                                setShowModal(false);
+                            }}>Ya</IonButton>
+                            <IonButton onClick={() => setShowModal(false)}>Batal</IonButton>
+                        </div> */}
+                        <IonCard>
+                            <IonCardHeader>
+                                <IonCardTitle color="danger">Penting!</IonCardTitle>
+                            </IonCardHeader>
+
+                            <IonCardContent>
+                                <ul>
+                                    <li>Pastikan Anda menyelesaikan ujian selama waktu yang di tentukan.</li>
+                                    <li>Jika waktu habis, jawaban Anda tidak akan terkirim.</li>
+                                </ul>
+                                <h4>Apakah anda yakin ingin memulai ujian?</h4>
+                                <IonButton color="success" onClick={() => {
+                                    confirmGoToUjian();
+                                    setShowModal(false);
+                                }}>Ya</IonButton>
+                                <IonButton color="danger" onClick={() => setShowModal(false)}>Batal</IonButton>
+                            </IonCardContent>
+                        </IonCard>
+                    </IonContent>
+                </IonModal>
             </IonPage>
-            <IonAlert
-                isOpen={showAlert}
-                onDidDismiss={() => setShowAlert(false)}
-                // header={'Konfirmasi'}
-                message={'Apakah anda yakin ingin memulai ujian?'}
-                buttons={[
-                    {
-                        text: 'Batal',
-                        role: 'cancel',
-                        cssClass: 'secondary',
-                        handler: blah => {
-                            setShowAlert(false);
-                        }
-                    },
-                    {
-                        text: 'Ya',
-                        handler: () => {
-                            confirmGoToUjian();
-                        }
-                    }
-                ]}
-            />
         </>
     );
 };

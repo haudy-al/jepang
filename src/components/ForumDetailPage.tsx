@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButtons, IonBackButton, IonAvatar, IonText, IonGrid, IonRow, IonCol, IonButton, IonItemSliding, IonItem, IonLabel, IonItemOptions } from '@ionic/react';
+import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButtons, IonBackButton, IonAvatar, IonText, IonGrid, IonRow, IonCol, IonButton, IonItemSliding, IonItem, IonLabel, IonItemOptions, IonNote } from '@ionic/react';
 import { chevronBack, thumbsUpOutline } from 'ionicons/icons';
 
 const ForumDetailPage: React.FC = () => {
@@ -40,25 +40,16 @@ const ForumDetailPage: React.FC = () => {
                 </IonCard>
                 <IonCard className="comment-card">
                     <IonCardContent>
-                        <IonGrid>
-                            <IonRow>
-                                <IonCol size="3" className="ion-text-center">
-                                    <IonAvatar aria-hidden="true" slot="start">
-                                        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                                    </IonAvatar>
-                                </IonCol>
-                                <IonCol size="7">
-                                    <IonText className="ion-text-wrap">Nama Pengguna</IonText>
-                                    <p className="ion-text-wrap">Komentar dari pengguna disini...</p>
-                                </IonCol>
-                                <IonCol size="2" className="ion-text-center">
-                                    <IonButton fill="clear" color="primary">
-                                        <IonIcon icon={thumbsUpOutline} slot="start" />
-                                        Like
-                                    </IonButton>
-                                </IonCol>
-                            </IonRow>
-                        </IonGrid>
+
+
+                        <IonItem >
+                            <IonLabel><b>Jajang</b>---<IonNote>od tempore assumenda.</IonNote><p><IonIcon icon={thumbsUpOutline} slot="start" /></p></IonLabel>
+
+                        </IonItem>
+                        <IonItem >
+                            <IonLabel><b>Dandi sugandi</b>---<IonNote>facilis voluptate temporibus voluptatem error rerum amet. Quae recusandae iure exercitationem ratione a, corrupti alias architecto vel dolorem quod tempore assumenda.</IonNote><p><IonIcon icon={thumbsUpOutline} slot="start" /></p></IonLabel>
+
+                        </IonItem>
                     </IonCardContent>
                 </IonCard>
             </IonContent>

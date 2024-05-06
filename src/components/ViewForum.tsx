@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonLoading, IonFab, IonFabButton, IonFabList, IonThumbnail, IonSearchbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonLoading, IonFab, IonFabButton, IonFabList, IonThumbnail, IonSearchbar, IonNote } from '@ionic/react';
 import { Redirect, Route, useHistory, useParams } from 'react-router-dom';
 import '../pages/HomePage.scss';
 import Footer from './Footer';
@@ -35,17 +35,11 @@ const ViewForum: React.FC = () => {
                 <IonContent >
                     <IonCard>
                         <IonItem lines="none" onClick={() => history.push('/forum/1')}>
-                            <IonThumbnail slot="start">
-                                <img className='custom-forum-image' alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-                            </IonThumbnail>
-                            <IonLabel>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta aperiam minus ducimus culpa odio beatae delectus. Quidem natus qui nisi.</IonLabel>
+                            <IonLabel><b>Haudy al-Kautsar</b>---<IonNote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime facilis voluptate temporibus voluptatem error rerum amet. Quae recusandae iure exercitationem ratione a, corrupti alias architecto vel dolorem quod tempore assumenda.</IonNote></IonLabel>
                             <span slot='end'><IonIcon icon={repeatOutline}></IonIcon> 2</span>
                         </IonItem>
                         <IonItem lines="none" onClick={() => history.push('/forum/1')}>
-                            <IonThumbnail slot="start">
-                                <img className='custom-forum-image' alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-                            </IonThumbnail>
-                            <IonLabel>Item Lines None</IonLabel>
+                            <IonLabel><b>Dandi sugandi</b>---<IonNote>facilis voluptate temporibus voluptatem error rerum amet. Quae recusandae iure exercitationem ratione a, corrupti alias architecto vel dolorem quod tempore assumenda.</IonNote></IonLabel>
                             <span slot='end'><IonIcon icon={repeatOutline}></IonIcon> 2</span>
                         </IonItem>
                     </IonCard>
