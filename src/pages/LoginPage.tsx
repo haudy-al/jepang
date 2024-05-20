@@ -37,17 +37,23 @@ const LoginPage: React.FC = () => {
     const HandleGoogleLogin = async (googleUser: any) => {
 
         try {
-            const response = await axios.post('https://api.haudy.my.id/api/login-google', {
+            const response = await axios.post('https://api.haudy.my.id/api/auth/google', {
                 email: googleUser.email,
                 name: googleUser.name,
             });
 
+            // console.log(googleUser);
+            
+
             if (response.data && response.data.token) {
                 localStorage.setItem('jwtToken', response.data.token);
+                localStorage.setItem('userData', JSON.stringify(response.data.user));
+                // console.log(JSON.parse(`${localStorage.getItem('userData')}`));
+                
                 setToastMessage('Login berhasil');
                 setShowToast(true);
                 setTimeout(() => {
-                    history.push('/home');
+                    window.location.href = '/home';
                 }, 1000);
             }
         } catch (error: any) {

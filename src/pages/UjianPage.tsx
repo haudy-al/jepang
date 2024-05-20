@@ -1,15 +1,14 @@
-
-
 import React, { useState, useEffect } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonModal, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonThumbnail, IonInfiniteScroll, IonInfiniteScrollContent, IonModal, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonLoading } from '@ionic/react';
 import { format } from 'date-fns';
 import { toZonedTime } from 'date-fns-tz';
 import { useHistory } from 'react-router-dom';
-import { user } from '../data/user';
 import axios from 'axios';
 import { useToast } from '../components/ToastCustom';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
+
+import { user } from "../data/user";
 
 const UjianPage: React.FC = () => {
     const history = useHistory();
@@ -18,47 +17,71 @@ const UjianPage: React.FC = () => {
     const [userData, setUserData] = useState<any>(null);
     const showToastWithColor = useToast();
 
-    const [items, setItems] = useState([
-        { id: 1, title: "Judul Item 1", date: new Date("2023-01-01T14:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 2, title: "Judul Item 2", date: new Date("2023-01-02T15:30:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 3, title: "Judul Item 3", date: new Date("2023-01-03T16:45:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 4, title: "Judul Item 4", date: new Date("2023-01-04T17:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 5, title: "Judul Item 5", date: new Date("2023-01-05T18:30:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 6, title: "Judul Item 6", date: new Date("2023-01-06T19:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 7, title: "Judul Item 7", date: new Date("2023-01-07T20:15:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 8, title: "Judul Item 8", date: new Date("2023-01-08T21:45:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 9, title: "Judul Item 9", date: new Date("2023-01-09T22:30:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 11, title: "Judul Item 10", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 12, title: "Judul Item 11", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 13, title: "Judul Item 12", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 14, title: "Judul Item 13", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 15, title: "Judul Item 14", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 16, title: "Judul Item 15", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 17, title: "Judul Item 16", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 18, title: "Judul Item 17", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 19, title: "Judul Item 18", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 20, title: "Judul Item 19", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" },
-        { id: 21, title: "Judul Item 20", date: new Date("2023-01-10T23:00:00"), imageUrl: "https://via.placeholder.com/150" }
-    ]);
-    const [displayItems, setDisplayItems] = useState(items.slice(0, 8));
+    const [items, setItems] = useState<any[]>([]);
+    const [displayItems, setDisplayItems] = useState<any[]>([]);
     const [isInfiniteDisabled, setIsInfiniteDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
 
     const loadData = () => {
         setTimeout(() => {
-            const newItems = items.slice(displayItems.length, displayItems.length + 8);
-            setDisplayItems(prevDisplayItems => [...prevDisplayItems, ...newItems]);
-            if (displayItems.length >= items.length) {
+            const batchSize = 5;
+            const startIndex = displayItems.length;
+            const endIndex = Math.min(startIndex + batchSize, items.length); // Batasi agar tidak melebihi jumlah total item
+            const newItems = items.slice(startIndex, endIndex);
+            const updatedDisplayItems = [...displayItems, ...newItems];
+            setDisplayItems(updatedDisplayItems);
+
+
+            if (updatedDisplayItems.length >= items.length) {
                 setIsInfiniteDisabled(true);
             }
+
+
         }, 500);
     };
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('https://api.haudy.my.id/api/ujian', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'x-api-key': 'dewa'
+                },
+            });
+            const newItems = response.data.map((item: any) => ({
+                id: item.id,
+                title: item.title,
+                description: item.description,
+                start_time: new Date(item.start_time),
+                end_time: new Date(item.end_time),
+                imageUrl: "https://via.placeholder.com/150"
+            }));
+            setItems(newItems);
+            let i = newItems.slice(0, 8);
+            setDisplayItems(i);
+            setIsLoading(false);
+
+
+
+
+        } catch (error) {
+            setIsLoading(false);
+
+            console.log(error);
+        }
+
+
+
+    };
+
 
     const UjianToken = async (ujian_id: number, user_id: number) => {
         try {
             const response = await axios.get(`https://api.haudy.my.id/api/ujian-token/${ujian_id}/${user_id}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': 'dewa'
+                    // 'x-api-key': 'dewa'
                 },
             });
             return response.data;
@@ -88,12 +111,17 @@ const UjianPage: React.FC = () => {
         }
     };
 
+
+
     useEffect(() => {
-        const fetchData = async () => {
-            const userData = await user();
+        fetchData();
+
+        const getUserData = async () => {
+            const userData = await JSON.parse(`${localStorage.getItem('userData')}`);
             setUserData(userData);
         };
-        fetchData();
+
+        getUserData();
     }, []);
 
     return (
@@ -109,19 +137,33 @@ const UjianPage: React.FC = () => {
                     </IonToolbar>
                 </IonHeader>
                 <IonContent className="ion-padding">
-                    <IonList>
-                        {displayItems.map(item => (
-                            <IonItem key={item.id} onClick={() => goToUjian(item.id)}>
-                                <IonThumbnail slot="start">
-                                    <img src={item.imageUrl} alt={item.title} />
-                                </IonThumbnail>
-                                <IonLabel>
-                                    <h2>{item.title}</h2>
-                                    <p>Tanggal Upload: {format(item.date, 'dd-MM-yyyy HH:mm')}</p>
-                                </IonLabel>
-                            </IonItem>
-                        ))}
-                    </IonList>
+                    {isLoading ? (
+                        <IonLoading
+                            isOpen={isLoading}
+                            message={'Fetching data...'}
+                            duration={3000}
+                        />
+                    ) : (
+                        <IonList>
+                            {displayItems.map(item => (
+                                <IonItem key={item.id} onClick={() => goToUjian(item.id)}>
+                                    <IonThumbnail slot="start">
+                                        <img src={item.imageUrl} alt={item.title} />
+                                    </IonThumbnail>
+                                    <IonLabel>
+                                        <h2>{item.title}</h2>
+
+                                        <p>
+                                            Mulai: {format(item.start_time, 'dd/MM/yyyy HH:mm')}
+                                        </p>
+                                        <p>
+                                            Selesai: {format(item.end_time, 'dd/MM/yyyy HH:mm')}
+                                        </p>
+                                    </IonLabel>
+                                </IonItem>
+                            ))}
+                        </IonList>
+                    )}
                     <IonInfiniteScroll
                         onIonInfinite={(ev) => {
                             loadData();
@@ -134,43 +176,33 @@ const UjianPage: React.FC = () => {
                             loadingText="Loading more items...">
                         </IonInfiniteScrollContent>
                     </IonInfiniteScroll>
+
                 </IonContent>
-                <Footer />
-                <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-                    <IonContent>
-                        {/* <div>
-                            <p>Apakah anda yakin ingin memulai ujian?</p>
+            </IonPage>
+            <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+                <IonContent>
+
+                    <IonCard>
+                        <IonCardHeader>
+                            <IonCardTitle color="danger">Penting!</IonCardTitle>
+                        </IonCardHeader>
+
+                        <IonCardContent>
                             <ul>
-                                <li>Pastikan Anda menyelesaikan ujian selama waktu yang masih ada.</li>
+                                <li>Pastikan Anda menyelesaikan ujian selama waktu yang di tentukan.</li>
                                 <li>Jika waktu habis, jawaban Anda tidak akan terkirim.</li>
                             </ul>
-                            <IonButton onClick={() => {
+                            <h4>Apakah anda yakin ingin memulai ujian?</h4>
+                            <IonButton color="success" onClick={() => {
                                 confirmGoToUjian();
                                 setShowModal(false);
                             }}>Ya</IonButton>
-                            <IonButton onClick={() => setShowModal(false)}>Batal</IonButton>
-                        </div> */}
-                        <IonCard>
-                            <IonCardHeader>
-                                <IonCardTitle color="danger">Penting!</IonCardTitle>
-                            </IonCardHeader>
-
-                            <IonCardContent>
-                                <ul>
-                                    <li>Pastikan Anda menyelesaikan ujian selama waktu yang di tentukan.</li>
-                                    <li>Jika waktu habis, jawaban Anda tidak akan terkirim.</li>
-                                </ul>
-                                <h4>Apakah anda yakin ingin memulai ujian?</h4>
-                                <IonButton color="success" onClick={() => {
-                                    confirmGoToUjian();
-                                    setShowModal(false);
-                                }}>Ya</IonButton>
-                                <IonButton color="danger" onClick={() => setShowModal(false)}>Batal</IonButton>
-                            </IonCardContent>
-                        </IonCard>
-                    </IonContent>
-                </IonModal>
-            </IonPage>
+                            <IonButton color="danger" onClick={() => setShowModal(false)}>Batal</IonButton>
+                        </IonCardContent>
+                    </IonCard>
+                </IonContent>
+            </IonModal>
+            <Footer />
         </>
     );
 };
