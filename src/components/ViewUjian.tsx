@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonLoading, IonFab, IonFabButton, IonFabList, IonThumbnail, IonSearchbar, IonRadioGroup, IonRadio } from '@ionic/react';
-import { Redirect, Route, useHistory, useParams } from 'react-router-dom';
-import '../pages/HomePage.scss';
-import Footer from './Footer';
-import Sidebar from './Sidebar';
-import { add, addCircle, caretDownOutline, chevronUpCircle, colorPalette, document, globe, repeatOutline, time } from 'ionicons/icons';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonCard, IonCardContent, IonLoading, IonRadioGroup, IonRadio } from '@ionic/react';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { user } from '../data/user';
 
 const ViewUjian: React.FC = () => {
     const history = useHistory();
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: string }>({});
     const [countdown, setCountdown] = useState('');
-    const tokenUjian = '';
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [tokenVerified, setTokenVerified] = useState<boolean>(false); 
+
+
 
     interface Params {
         id: string;
@@ -20,52 +18,22 @@ const ViewUjian: React.FC = () => {
         expiredDate: string;
     }
 
-    interface UserAnswer {
-        soalId: number;
-        jawaban: string;
+    interface Soal {
+        id: number;
+        ujian_id: number;
+        type: string;
+        question: string;
+        choices: { id: string; teks: string }[];
+        correct_answer: string;
+        audio_url: string;
+        image_url: string;
+        created_at: any;
+        updated_at: any;
     }
 
     const { id, token, expiredDate } = useParams<Params>();
 
-    const soal = [
-        {
-            id: 1,
-            type: 'text',
-            pertanyaan: "Apa ibu kota Indonesia?",
-            pilihan: [
-                { id: "a", teks: "Jakarta" },
-                { id: "b", teks: "Bandung" },
-                { id: "c", teks: "Surabaya" },
-                { id: "d", teks: "Bali" }
-            ],
-            jawaban: "a"
-        },
-        {
-            id: 2,
-            type: 'text',
-            pertanyaan: "Siapakah Presiden pertama Indonesia?",
-            pilihan: [
-                { id: "a", teks: "Soekarno" },
-                { id: "b", teks: "Soeharto" },
-                { id: "c", teks: "Megawati" },
-                { id: "d", teks: "Jokowi" }
-            ],
-            jawaban: "a"
-        },
-        {
-            id: 3,
-            type: 'audio',
-            pertanyaan: "dengarkan soal nya ",
-            file: "https://api.haudy.my.id/test.mp3",
-            pilihan: [
-                { id: "a", teks: "test 1" },
-                { id: "b", teks: "test2" },
-                { id: "c", teks: "test 3" },
-                { id: "d", teks: "test 4" }
-            ],
-            jawaban: "d"
-        },
-    ];
+    const [soal, setSoal] = useState<Soal[]>([]);
 
     const handleSelect = (soalId: number, value: string) => {
         if (countdown !== 'Waktu telah habis') {
@@ -77,10 +45,10 @@ const ViewUjian: React.FC = () => {
 
     const handleSubmit = () => {
         let correctAnswers = 0;
-        const userAnswers: UserAnswer[] = [];
+        const userAnswers: any[] = [];
         soal.forEach(s => {
             const userAnswer = selectedAnswers[s.id];
-            if (userAnswer === s.jawaban) {
+            if (userAnswer === s.correct_answer) {
                 correctAnswers++;
             }
             userAnswers.push({ soalId: s.id, jawaban: userAnswer });
@@ -89,67 +57,81 @@ const ViewUjian: React.FC = () => {
         alert(`Anda menjawab ${correctAnswers} dari ${soal.length} soal dengan benar.`);
     };
 
-    // const CheckUjianToken = async (token: string) => {
-    //     try {
-    //         const response = await axios.get(`https://api.haudy.my.id/api/ujian-token/${token}`, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'x-api-key': 'dewa'
-    //             },
-    //         });
-    //         return response.data;
-    //     } catch (error) {
-    //         console.log(error);
-    //         return null;
-    //     }
-    // };
-
-    function decodeDateFromURL(dateStr: string) {
-        // Decode tanggal dari URL
-        var decodedDate = decodeURIComponent(dateStr);
-        // Ubah kembali menjadi objek tanggal
-        return new Date(decodedDate);
-    }
-
-    // console.log("ini ex " + decodeDateFromURL(expiredDate));
+    const fetchSoal = async () => {
+        try {
+            const response = await axios.get(`https://api.haudy.my.id/api/ujian/soal/${id}`);
+            setIsLoading(false);
+            setSoal(response.data);
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+        }
 
 
-    const calculateCountdown = async () => {
-        const expiredTime = decodeDateFromURL(expiredDate);
-
-        // Mendapatkan waktu saat ini dalam zona waktu yang tepat
-        const now = new Date();
-        const nowInJakartaTimezone = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
-
-        // Menghitung jarak waktu antara waktu kedaluwarsa dan waktu sekarang
-        const distance = expiredTime.getTime() - nowInJakartaTimezone.getTime();
-        const countdown = Math.max(0, distance); // Jarak waktu tidak boleh kurang dari 0
-        const hours = Math.floor((countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
-
-        // Mengupdate countdown
-        setCountdown(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
-
-        // Mengembalikan jarak waktu untuk keperluan lain jika diperlukan
-        return countdown;
     };
 
-
+    const CheckUjianToken = async (token: string) => {
+        try {
+            const response = await axios.get(`https://api.haudy.my.id/api/ujian-token/${token}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': 'dewa'
+                },
+            });            
+    
+            // Jika token valid (data tidak kosong), lanjutkan dengan ujian
+            if (Object.keys(response.data).length === 0) {
+                history.push('/home');
+                return null;
+            } else {
+                return response.data;
+            }
+        } catch (error) {
+            console.log(error);
+            // Jika terjadi kesalahan, arahkan kembali ke halaman beranda
+            history.push('/home');
+            return null;
+        }
+    };
+    
+    
 
     useEffect(() => {
+
         const fetchData = async () => {
-            const interval = setInterval(async () => {
-                const distance = await calculateCountdown();
-                if (distance <= 0) {
-                    setCountdown('Waktu telah habis');
-                    clearInterval(interval);
+            if (!tokenVerified) { 
+                const dataToken = await CheckUjianToken(token);
+                if (!dataToken) {
+                    history.push('/home')
+                    return; 
                 }
-            }, 1000);
+
+                setTokenVerified(true);
+            }
+
         };
 
         fetchData();
-    }, []);
+
+        const interval = setInterval(async () => {
+            const expiredTime = new Date(decodeURIComponent(expiredDate));
+            const now = new Date();
+            const distance = expiredTime.getTime() - now.getTime();
+            const countdown = Math.max(0, distance);
+            const hours = Math.floor((countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+            setCountdown(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+            if (distance <= 0) {
+                setCountdown('Waktu telah habis');
+                clearInterval(interval);
+            }
+        }, 1000);
+
+        fetchSoal(); // Fetch questions when component mounts
+
+        return () => clearInterval(interval); // Cleanup interval
+    }, [expiredDate, id, token, tokenVerified]);
 
     return (
         <IonPage>
@@ -166,40 +148,45 @@ const ViewUjian: React.FC = () => {
                     <IonRow>
                         <IonCol size="12">
                             <IonCard>
-                                {/* <IonCardHeader>
-                                    <IonCardSubtitle>Waktu Tersisa</IonCardSubtitle>
-                                    <IonCardTitle>{countdown}</IonCardTitle>
-                                </IonCardHeader> */}
-                                <IonCardContent>
-                                    {countdown !== 'Waktu telah habis' ? (
-                                        soal.map(s => (
-                                            <IonList key={s.id}>
-                                                <IonItem>
-                                                    <IonLabel>{s.pertanyaan}</IonLabel>
 
-                                                </IonItem>
-                                                {s.type === 'audio' && (
-                                                    <IonItem>
-                                                        <audio controls controlsList="nodownload noplaybackrate">
-                                                            <source src={s.file} type="audio/mpeg" />
-                                                            not support the audio element.
-                                                        </audio>
-                                                    </IonItem>
-                                                )}
-                                                <IonRadioGroup value={selectedAnswers[s.id]} onIonChange={e => handleSelect(s.id, e.detail.value)}>
-                                                    {s.pilihan.map(pilihan => (
-                                                        <IonItem key={pilihan.id}>
-                                                            <IonRadio slot="start" value={pilihan.id} aria-label={pilihan.teks}></IonRadio>
-                                                            <IonLabel>{pilihan.teks}</IonLabel>
-                                                        </IonItem>
-                                                    ))}
-                                                </IonRadioGroup>
-                                            </IonList>
-                                        ))
+                                <IonCardContent>
+                                    {isLoading ? (
+                                     
+                                     <IonLoading
+                                            isOpen={isLoading}
+                                            message={'Fetching data...'}
+                                            duration={1000}
+                                        />
                                     ) : (
-                                        <IonItem>
-                                            <IonLabel>Waktu telah habis. Anda tidak dapat menjawab soal lagi.</IonLabel>
-                                        </IonItem>
+                                        countdown !== 'Waktu telah habis' ? (
+                                            soal.map(s => (
+                                                <IonList key={s.id}>
+                                                    <IonItem>
+                                                        <IonLabel>{s.question}</IonLabel>
+                                                    </IonItem>
+                                                    {s.type === 'audio' && (
+                                                        <IonItem>
+                                                            <audio controls controlsList="nodownload noplaybackrate">
+                                                                <source src={s.audio_url} type="audio/mpeg" />
+                                                                not support the audio element.
+                                                            </audio>
+                                                        </IonItem>
+                                                    )}
+                                                    <IonRadioGroup value={selectedAnswers[s.id]} onIonChange={e => handleSelect(s.id, e.detail.value)}>
+                                                        {s.choices.map((c, index) => (
+                                                            <IonItem key={index}>
+                                                                <IonRadio slot="start" value={c} aria-label={String(c)}></IonRadio>
+                                                                <IonLabel>{String(c)}</IonLabel>
+                                                            </IonItem>
+                                                        ))}
+                                                    </IonRadioGroup>
+                                                </IonList>
+                                            ))
+                                        ) : (
+                                            <IonItem>
+                                                <IonLabel>Waktu telah habis. Anda tidak dapat menjawab soal lagi.</IonLabel>
+                                            </IonItem>
+                                        )
                                     )}
                                 </IonCardContent>
                             </IonCard>

@@ -8,8 +8,6 @@ import { useToast } from '../components/ToastCustom';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 
-import { user } from "../data/user";
-
 const UjianPage: React.FC = () => {
     const history = useHistory();
     const [showModal, setShowModal] = useState(false);
@@ -22,22 +20,18 @@ const UjianPage: React.FC = () => {
     const [isInfiniteDisabled, setIsInfiniteDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-
     const loadData = () => {
         setTimeout(() => {
             const batchSize = 5;
             const startIndex = displayItems.length;
-            const endIndex = Math.min(startIndex + batchSize, items.length); // Batasi agar tidak melebihi jumlah total item
+            const endIndex = Math.min(startIndex + batchSize, items.length);
             const newItems = items.slice(startIndex, endIndex);
             const updatedDisplayItems = [...displayItems, ...newItems];
             setDisplayItems(updatedDisplayItems);
 
-
             if (updatedDisplayItems.length >= items.length) {
                 setIsInfiniteDisabled(true);
             }
-
-
         }, 500);
     };
 
@@ -46,7 +40,6 @@ const UjianPage: React.FC = () => {
             const response = await axios.get('https://api.haudy.my.id/api/ujian', {
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'x-api-key': 'dewa'
                 },
             });
             const newItems = response.data.map((item: any) => ({
@@ -61,27 +54,17 @@ const UjianPage: React.FC = () => {
             let i = newItems.slice(0, 8);
             setDisplayItems(i);
             setIsLoading(false);
-
-
-
-
         } catch (error) {
             setIsLoading(false);
-
             console.log(error);
         }
-
-
-
     };
-
 
     const UjianToken = async (ujian_id: number, user_id: number) => {
         try {
             const response = await axios.get(`https://api.haudy.my.id/api/ujian-token/${ujian_id}/${user_id}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'x-api-key': 'dewa'
                 },
             });
             return response.data;
@@ -98,11 +81,30 @@ const UjianPage: React.FC = () => {
 
     const confirmGoToUjian = async () => {
         try {
+            const currentTime = toZonedTime(new Date(), 'Asia/Jakarta');
+
+            // Find the selected item to get its end_time
+            const selectedItem = items.find(item => item.id === selectedId);
+            if (!selectedItem) {
+                showToastWithColor("Item tidak ditemukan", "danger");
+                setShowModal(false);
+                return;
+            }
+
+            const endTime = toZonedTime(new Date(selectedItem.end_time), 'Asia/Jakarta');
+
+            if (currentTime > endTime) {
+                showToastWithColor("Ujian Telah Berakhir", "danger");
+                setShowModal(false);
+                return;
+            }
+
+            // Only request the token if the exam has not ended
             const tokenResponse = await UjianToken(selectedId!, userData.id);
             const token = tokenResponse.token;
-            const expired = toZonedTime(new Date(tokenResponse.expired), 'Asia/Jakarta');
+
             if (selectedId !== null) {
-                history.push(`/ujian/${selectedId}/${token}/${encodeURIComponent(format(expired, 'yyyy-MM-dd HH:mm:ss'))}`);
+                history.push(`/ujian/${selectedId}/${token}/${encodeURIComponent(format(endTime, 'yyyy-MM-dd HH:mm:ss'))}`);
             }
             setShowModal(false);
         } catch (error) {
@@ -110,8 +112,6 @@ const UjianPage: React.FC = () => {
             setShowModal(false);
         }
     };
-
-
 
     useEffect(() => {
         fetchData();
@@ -145,23 +145,44 @@ const UjianPage: React.FC = () => {
                         />
                     ) : (
                         <IonList>
-                            {displayItems.map(item => (
-                                <IonItem key={item.id} onClick={() => goToUjian(item.id)}>
-                                    <IonThumbnail slot="start">
-                                        <img src={item.imageUrl} alt={item.title} />
-                                    </IonThumbnail>
-                                    <IonLabel>
-                                        <h2>{item.title}</h2>
+                            {displayItems.map(item => {
+                                const currentTime = toZonedTime(new Date(), 'Asia/Jakarta');
+                                const endTime = toZonedTime(new Date(item.end_time), 'Asia/Jakarta');
+                                const isExamEnded = currentTime > endTime;
 
-                                        <p>
-                                            Mulai: {format(item.start_time, 'dd/MM/yyyy HH:mm')}
-                                        </p>
-                                        <p>
-                                            Selesai: {format(item.end_time, 'dd/MM/yyyy HH:mm')}
-                                        </p>
-                                    </IonLabel>
-                                </IonItem>
-                            ))}
+                                return (
+                                    <IonItem
+                                        key={item.id}
+                                        onClick={() => !isExamEnded && goToUjian(item.id)}
+                                        style={{
+                                            opacity: isExamEnded ? 0.5 : 1,
+                                            pointerEvents: isExamEnded ? 'none' : 'auto'
+                                        }}
+                                    >
+                                        <IonThumbnail slot="start">
+                                            <img src={item.imageUrl} alt={item.title} />
+                                        </IonThumbnail>
+                                        <IonLabel>
+                                            <h2>{item.title}</h2>
+                                            {isExamEnded ? (
+                                                <p style={{ color: 'red' }}>
+                                                    Ditutup
+                                                </p>
+                                            ) : (
+                                                <>
+                                                    <p>
+                                                        Mulai: {format(item.start_time, 'dd/MM/yyyy HH:mm')}
+                                                    </p>
+                                                    <p>
+                                                        Selesai: {format(item.end_time, 'dd/MM/yyyy HH:mm')}
+                                                    </p>
+                                                </>
+                                            )}
+                                        </IonLabel>
+
+                                    </IonItem>
+                                );
+                            })}
                         </IonList>
                     )}
                     <IonInfiniteScroll
@@ -176,17 +197,14 @@ const UjianPage: React.FC = () => {
                             loadingText="Loading more items...">
                         </IonInfiniteScrollContent>
                     </IonInfiniteScroll>
-
                 </IonContent>
             </IonPage>
             <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
                 <IonContent>
-
                     <IonCard>
                         <IonCardHeader>
                             <IonCardTitle color="danger">Penting!</IonCardTitle>
                         </IonCardHeader>
-
                         <IonCardContent>
                             <ul>
                                 <li>Pastikan Anda menyelesaikan ujian selama waktu yang di tentukan.</li>
