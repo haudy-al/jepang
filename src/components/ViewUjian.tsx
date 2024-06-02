@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonCard, IonCardContent, IonLoading, IonRadioGroup, IonRadio } from '@ionic/react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../pages/HomePage.scss';
 
 const ViewUjian: React.FC = () => {
     const history = useHistory();
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: string }>({});
     const [countdown, setCountdown] = useState('');
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [tokenVerified, setTokenVerified] = useState<boolean>(false); 
+    const [tokenVerified, setTokenVerified] = useState<boolean>(false);
 
 
 
@@ -59,7 +60,11 @@ const ViewUjian: React.FC = () => {
 
     const fetchSoal = async () => {
         try {
-            const response = await axios.get(`https://api.haudy.my.id/api/ujian/soal/${id}`);
+            const response = await axios.get(`https://api.haudy.my.id/api/ujian/soal/${id}`,{
+                headers: {
+                    'x-api-key': 'dewa'
+                }
+            });
             setIsLoading(false);
             setSoal(response.data);
         } catch (error) {
@@ -77,8 +82,8 @@ const ViewUjian: React.FC = () => {
                     'Content-Type': 'application/json',
                     'x-api-key': 'dewa'
                 },
-            });            
-    
+            });
+
             // Jika token valid (data tidak kosong), lanjutkan dengan ujian
             if (Object.keys(response.data).length === 0) {
                 history.push('/home');
@@ -93,17 +98,17 @@ const ViewUjian: React.FC = () => {
             return null;
         }
     };
-    
-    
+
+
 
     useEffect(() => {
 
         const fetchData = async () => {
-            if (!tokenVerified) { 
+            if (!tokenVerified) {
                 const dataToken = await CheckUjianToken(token);
                 if (!dataToken) {
                     history.push('/home')
-                    return; 
+                    return;
                 }
 
                 setTokenVerified(true);
@@ -149,10 +154,10 @@ const ViewUjian: React.FC = () => {
                         <IonCol size="12">
                             <IonCard>
 
-                                <IonCardContent>
+                                <>
                                     {isLoading ? (
-                                     
-                                     <IonLoading
+
+                                        <IonLoading
                                             isOpen={isLoading}
                                             message={'Fetching data...'}
                                             duration={1000}
@@ -160,18 +165,24 @@ const ViewUjian: React.FC = () => {
                                     ) : (
                                         countdown !== 'Waktu telah habis' ? (
                                             soal.map(s => (
-                                                <IonList key={s.id}>
-                                                    <IonItem>
-                                                        <IonLabel>{s.question}</IonLabel>
-                                                    </IonItem>
-                                                    {s.type === 'audio' && (
+                                                <IonList key={s.id} className='custom-list'>
+                                                    {s.image_url && (
+                                                        <IonItem className='border-0'>
+                                                            <img src={`https://api.haudy.my.id/storage/${s.image_url}`} alt="Question related" style={{ maxWidth: '100%' }} />
+                                                        </IonItem>
+                                                    )}
+                                                    {s.audio_url && (
                                                         <IonItem>
-                                                            <audio controls controlsList="nodownload noplaybackrate">
-                                                                <source src={s.audio_url} type="audio/mpeg" />
-                                                                not support the audio element.
+                                                            <audio controls>
+                                                                <source src={`https://api.haudy.my.id/storage/${s.audio_url}`} type="audio/mpeg" />
+                                                                Your browser does not support the audio element.
                                                             </audio>
                                                         </IonItem>
                                                     )}
+                                                    <IonItem className='border-0'>
+                                                        <IonLabel>{s.question}</IonLabel>
+                                                    </IonItem>
+
                                                     <IonRadioGroup value={selectedAnswers[s.id]} onIonChange={e => handleSelect(s.id, e.detail.value)}>
                                                         {s.choices.map((c, index) => (
                                                             <IonItem key={index}>
@@ -188,7 +199,7 @@ const ViewUjian: React.FC = () => {
                                             </IonItem>
                                         )
                                     )}
-                                </IonCardContent>
+                                </>
                             </IonCard>
                         </IonCol>
                     </IonRow>

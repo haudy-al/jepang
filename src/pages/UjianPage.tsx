@@ -20,6 +20,13 @@ const UjianPage: React.FC = () => {
     const [isInfiniteDisabled, setIsInfiniteDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    type UjianData = {
+        title: string;
+        description: string;
+    };
+
+    const [dataUjianSelect, setDataUjianSelect] = useState<UjianData | null>(null);
+
     const loadData = () => {
         setTimeout(() => {
             const batchSize = 5;
@@ -40,6 +47,7 @@ const UjianPage: React.FC = () => {
             const response = await axios.get('https://api.haudy.my.id/api/ujian', {
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-api-key': 'dewa'
                 },
             });
             const newItems = response.data.map((item: any) => ({
@@ -65,6 +73,8 @@ const UjianPage: React.FC = () => {
             const response = await axios.get(`https://api.haudy.my.id/api/ujian-token/${ujian_id}/${user_id}`, {
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-api-key': 'dewa'
+
                 },
             });
             return response.data;
@@ -74,8 +84,12 @@ const UjianPage: React.FC = () => {
         }
     };
 
-    const goToUjian = (id: number) => {
+    const goToUjian = (id: number, data: any) => {
         setSelectedId(id);
+        setDataUjianSelect({
+            title: data.title,
+            description: data.description
+        });
         setShowModal(true);
     };
 
@@ -92,9 +106,14 @@ const UjianPage: React.FC = () => {
             }
 
             const endTime = toZonedTime(new Date(selectedItem.end_time), 'Asia/Jakarta');
+            const startTime = toZonedTime(new Date(selectedItem.start_time), 'Asia/Jakarta');
 
             if (currentTime > endTime) {
                 showToastWithColor("Ujian Telah Berakhir", "danger");
+                setShowModal(false);
+                return;
+            } else if (currentTime < startTime) {
+                showToastWithColor("Ujian Belum Dimulai", "danger");
                 setShowModal(false);
                 return;
             }
@@ -153,7 +172,7 @@ const UjianPage: React.FC = () => {
                                 return (
                                     <IonItem
                                         key={item.id}
-                                        onClick={() => !isExamEnded && goToUjian(item.id)}
+                                        onClick={() => !isExamEnded && goToUjian(item.id, item)}
                                         style={{
                                             opacity: isExamEnded ? 0.5 : 1,
                                             pointerEvents: isExamEnded ? 'none' : 'auto'
@@ -201,6 +220,17 @@ const UjianPage: React.FC = () => {
             </IonPage>
             <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
                 <IonContent>
+
+                    <IonCard>
+
+                        <IonCardContent>
+                        <IonCardTitle>{dataUjianSelect?.title}</IonCardTitle>
+
+                            <br />
+
+                            <p>{dataUjianSelect?.description}</p>
+                        </IonCardContent>
+                    </IonCard>
                     <IonCard>
                         <IonCardHeader>
                             <IonCardTitle color="danger">Penting!</IonCardTitle>

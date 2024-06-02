@@ -40,16 +40,20 @@ const LoginPage: React.FC = () => {
             const response = await axios.post('https://api.haudy.my.id/api/auth/google', {
                 email: googleUser.email,
                 name: googleUser.name,
+            }, {
+                headers: {
+                    'x-api-key': 'dewa'
+                }
             });
 
-            // console.log(googleUser);
+            console.log(googleUser);
             
 
             if (response.data && response.data.token) {
                 localStorage.setItem('jwtToken', response.data.token);
                 localStorage.setItem('userData', JSON.stringify(response.data.user));
                 // console.log(JSON.parse(`${localStorage.getItem('userData')}`));
-                
+
                 setToastMessage('Login berhasil');
                 setShowToast(true);
                 setTimeout(() => {
@@ -93,10 +97,9 @@ const LoginPage: React.FC = () => {
     return (
         <IonPage>
             <IonContent className="login-content"> {/* Apply custom class */}
-            <div className='image-container'>
-            <img src={vc1} alt="" className="standing-image" />
-
-            </div>
+                <div className='image-container'>
+                    <img src={vc1} alt="" className="standing-image" />
+                </div>
                 <div className="login-container">
                     <img src={lockicon} alt="gambar" className="app-logo" /> {/* Add your logo */}
                     <input

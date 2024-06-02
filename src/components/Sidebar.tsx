@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonFooter, IonList, IonItem, IonLabel } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonFooter, IonList, IonItem, IonLabel, IonAvatar } from '@ionic/react';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 import { exitOutline, home, homeOutline, informationCircleOutline, leafOutline, search, settingsOutline } from 'ionicons/icons';
 
@@ -26,25 +26,35 @@ const Sidebar: React.FC = () => {
         <>
             <IonMenu side="end" contentId="main-content" type="overlay">
                 <IonHeader>
-                    <IonToolbar >
-                        <IonTitle>Menu</IonTitle>
+                    <IonToolbar>
+                        <IonRow className="avatar-row">
+                            <IonCol size="auto">
+                                <IonAvatar>
+                                    <img src="https://ionicframework.comdocs/img/demos/avatar.svg" alt="Avatar" className="avatar-image" />
+                                </IonAvatar>
+                            </IonCol>
+                            <IonCol className="user-info">
+                                <IonLabel className="user-name">Nama User</IonLabel>
+                                <IonLabel className="user-poin">Poin : <b>10</b></IonLabel>
+                            </IonCol>
+                        </IonRow>
                     </IonToolbar>
                 </IonHeader>
                 <IonContent className="ion-padding" fullscreen={true}>
                     <IonList lines="none">
-                        <IonItem button  className="menu-item">
+                        <IonItem button className="menu-item">
                             <IonIcon slot="start" icon={homeOutline} className="menu-icon"></IonIcon>
                             <IonLabel className="menu-label">Home</IonLabel>
                         </IonItem>
-                        <IonItem button  className="menu-item">
+                        <IonItem button className="menu-item">
                             <IonIcon slot="start" icon={settingsOutline} className="menu-icon"></IonIcon>
                             <IonLabel className="menu-label">Settings</IonLabel>
                         </IonItem>
-                        <IonItem button  className="menu-item">
+                        <IonItem button className="menu-item">
                             <IonIcon slot="start" icon={informationCircleOutline} className="menu-icon"></IonIcon>
                             <IonLabel className="menu-label">About</IonLabel>
                         </IonItem>
-                        <IonItem button onClick={handleLogout}  className="menu-item">
+                        <IonItem button onClick={handleLogout} className="menu-item">
                             <IonIcon slot="start" icon={leafOutline} className="menu-icon"></IonIcon>
                             <IonLabel className="menu-label">Logout</IonLabel>
                         </IonItem>
