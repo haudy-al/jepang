@@ -103,7 +103,7 @@ const HomePage: React.FC = () => {
                     <p>Kanji</p>
                   </div>
                 </IonCol>
-                <IonCol className="menu-item" onClick={() => console.log('Kotoba clicked')}>
+                <IonCol className="menu-item" onClick={() => history.push('/kotoba')}>
                   <a className="custom-button-menu" href="">
                     <img className="custom-icon-menu" src={logo_kotoba}></img>
                     <p>Kotoba</p>

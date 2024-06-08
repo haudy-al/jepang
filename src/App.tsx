@@ -35,6 +35,7 @@ import ViewForum from './components/ViewForum';
 import ForumDetailPage from './components/ForumDetailPage';
 import UjianPage from './pages/UjianPage';
 import ViewUjian from './components/ViewUjian';
+import Kotoba from './pages/Kotoba';
 
 
 setupIonicReact();
@@ -46,8 +47,9 @@ const App: React.FC = () => {
         <IonRouterOutlet>
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/login" component={LoginPage} exact />
-          <PrivateRoute path="/home" component={HomePage} exact />
+          <Route path="/home" component={HomePage} exact />
           <PrivateRoute path="/search" component={ViewSearch} exact />
+          <PrivateRoute path="/kotoba" component={Kotoba} exact />
           <PrivateRoute path="/leaderboard" component={Leaderboard} exact />
           <PrivateRoute path="/kanji" component={ViewKanji} exact />
           <PrivateRoute path="/kanji/:grade" component={GradeKanji} exact />

@@ -17,10 +17,15 @@ const Sidebar: React.FC = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('jwtToken');
+        localStorage.removeItem('userData');
         GoogleAuth.signOut();
         window.location.href = '/login';
     };
 
+    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+
+    // console.log(userData);
+    
     return (
 
         <>
@@ -29,12 +34,13 @@ const Sidebar: React.FC = () => {
                     <IonToolbar>
                         <IonRow className="avatar-row">
                             <IonCol size="auto">
+                                
                                 <IonAvatar>
-                                    <img src="https://ionicframework.comdocs/img/demos/avatar.svg" alt="Avatar" className="avatar-image" />
+                                    <img src={userData.image} alt="Avatar" className="avatar-image" />
                                 </IonAvatar>
                             </IonCol>
                             <IonCol className="user-info">
-                                <IonLabel className="user-name">Nama User</IonLabel>
+                                <IonLabel className="user-name">Nama : {userData.name}</IonLabel>
                                 <IonLabel className="user-poin">Poin : <b>10</b></IonLabel>
                             </IonCol>
                         </IonRow>

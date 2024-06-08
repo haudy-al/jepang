@@ -1,3 +1,8 @@
+
+body {
+  font-family: 'ヒラギノ角ゴ Pro W3', sans-serif;
+}
+
 .button-menu {
   background-color: transparent !important;
   color: rgb(188, 0, 45);
@@ -236,4 +241,9 @@ ion-fab-button::part(native):active::after {
   color: #333;
 }
 
+.jisho-logo {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+}
 

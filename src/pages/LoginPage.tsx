@@ -40,6 +40,7 @@ const LoginPage: React.FC = () => {
             const response = await axios.post('https://api.haudy.my.id/api/auth/google', {
                 email: googleUser.email,
                 name: googleUser.name,
+                image: googleUser.imageUrl,
             }, {
                 headers: {
                     'x-api-key': 'dewa'
@@ -54,6 +55,8 @@ const LoginPage: React.FC = () => {
                 localStorage.setItem('userData', JSON.stringify(response.data.user));
                 // console.log(JSON.parse(`${localStorage.getItem('userData')}`));
 
+                console.log(response.data);
+                
                 setToastMessage('Login berhasil');
                 setShowToast(true);
                 setTimeout(() => {

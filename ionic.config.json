@@ -9,6 +9,11 @@
     {
       "path": "/api",
       "proxyUrl": "https://api.haudy.my.id"
+    },
+    {
+      "path": "/jisho",
+      "proxyUrl": "https://jisho.org/api/v1/search/words"
     }
   ]
 }
+
