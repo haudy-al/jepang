@@ -30,6 +30,7 @@ const Kotoba: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [detailData, setDetailData] = useState<SearchResult | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [popularSearches, setPopularSearches] = useState<string[]>(['Sushi', 'Samurai', 'Tokyo', 'Anime']);
 
     interface JapaneseWord {
         word: string;
@@ -56,6 +57,7 @@ const Kotoba: React.FC = () => {
 
     function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
         setTimeout(() => {
+            handleSearch(searchText);
             event.detail.complete();
         }, 2000);
     }
@@ -69,7 +71,7 @@ const Kotoba: React.FC = () => {
         const query = e.target.value;
         setSearchText(query);
         if (query.length > 0) {
-            setIsLoading(true); 
+            setIsLoading(true);
             try {
                 const response = await fetch(`https://api.haudy.my.id/api/jisho?keyword=${encodeURIComponent(query)}`);
                 const data = await response.json();
@@ -77,7 +79,7 @@ const Kotoba: React.FC = () => {
             } catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
             }
-            setIsLoading(false);  
+            setIsLoading(false);
         } else {
             setSearchResults([]);
         }
@@ -97,6 +99,7 @@ const Kotoba: React.FC = () => {
                     </IonToolbar>
                 </IonHeader>
                 <IonContent className="">
+                    <br />
                     <img src={jisho_logo} alt="Jisho" className="jisho-logo" />
                     <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
                         <IonRefresherContent></IonRefresherContent>
@@ -114,28 +117,43 @@ const Kotoba: React.FC = () => {
                     {isLoading ? (
                         <center><IonSpinner /></center>
                     ) : (
-                        searchText && (searchResults.length > 0 ? (
-                            searchResults.map((result, index) => (
-                                <IonCard>
-                                    <IonCardContent>
-                                        <div key={index} onClick={() => handleResultClick(result)}>
+                        searchText ? (
+                            searchResults.length > 0 ? (
+                                searchResults.map((result, index) => (
+                                    <IonCard key={index}>
+                                        <IonCardContent onClick={() => handleResultClick(result)}>
                                             <IonList>
                                                 <p>{result.slug}</p>
                                                 <p>{result.japanese.map(jp => jp.word + ' (' + jp.reading + ')').join(', ')}</p>
                                                 <p>{result.senses.map(sense => sense.english_definitions.join(', ')).join('; ')}</p>
                                             </IonList>
-                                        </div>
-                                    </IonCardContent>
-                                </IonCard>
-                            ))
+                                        </IonCardContent>
+                                    </IonCard>
+                                ))
+                            ) : (
+                                <center>kosong</center>
+                            )
                         ) : (
-                            <center>kosong</center>
-                        ))
+                            <div>
+                                {/* <p>Pencarian Populer:</p>
+                                {popularSearches.map((search, index) => (
+
+                                    <IonCard >
+                                        <IonCardContent >
+                                            <IonButton key={index} onClick={() => setSearchText(search)}>
+                                                {search}
+                                            </IonButton>
+                                        </IonCardContent>
+                                    </IonCard>
+
+                                ))} */}
+                            </div>
+                        )
                     )}
 
 
                 </IonContent>
-             
+
 
             </IonPage>
             <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
@@ -147,7 +165,10 @@ const Kotoba: React.FC = () => {
                     </IonCardHeader>
                     <IonCardContent>
                         {detailData ? (
-                            <div>
+                            <div className='custom-modal-content-kotoba'>
+                                <h2><b>{Array.isArray(detailData.jlpt) ? detailData.jlpt.map(level => level.toUpperCase()).join(', ') : detailData.jlpt.toUpperCase()}</b></h2>
+
+                                <br />
                                 <h2>{detailData.japanese.map(jp => jp.word + ' (' + jp.reading + ')').join(', ')}</h2>
                                 <p dangerouslySetInnerHTML={{
                                     __html: detailData.senses.map(sense =>

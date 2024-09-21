@@ -24,8 +24,11 @@ const Sidebar: React.FC = () => {
 
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
 
+    const isLoggedIn = userData && Object.keys(userData).length > 0;
+
+
     // console.log(userData);
-    
+
     return (
 
         <>
@@ -33,16 +36,25 @@ const Sidebar: React.FC = () => {
                 <IonHeader>
                     <IonToolbar>
                         <IonRow className="avatar-row">
-                            <IonCol size="auto">
-                                
-                                <IonAvatar>
-                                    <img src={userData.image} alt="Avatar" className="avatar-image" />
-                                </IonAvatar>
-                            </IonCol>
-                            <IonCol className="user-info">
-                                <IonLabel className="user-name">Nama : {userData.name}</IonLabel>
-                                <IonLabel className="user-poin">Poin : <b>10</b></IonLabel>
-                            </IonCol>
+                        {isLoggedIn ? (
+                                <>
+                                    <IonCol size="auto">
+                                        <IonAvatar>
+                                            <img src={userData.image} alt="Avatar" className="avatar-image" />
+                                        </IonAvatar>
+                                    </IonCol>
+                                    <IonCol className="user-info">
+                                        <IonLabel className="user-name">Nama : {userData.name}</IonLabel>
+                                        <IonLabel className="user-poin">Poin : <b>10</b></IonLabel>
+                                    </IonCol>
+                                </>
+                            ) : (
+                                <IonCol size="auto">
+                                    <a className='login-btn-sidebar' href='/login'>
+                                        Login
+                                    </a>
+                                </IonCol>
+                            )}
                         </IonRow>
                     </IonToolbar>
                 </IonHeader>
@@ -60,10 +72,12 @@ const Sidebar: React.FC = () => {
                             <IonIcon slot="start" icon={informationCircleOutline} className="menu-icon"></IonIcon>
                             <IonLabel className="menu-label">About</IonLabel>
                         </IonItem>
-                        <IonItem button onClick={handleLogout} className="menu-item">
-                            <IonIcon slot="start" icon={leafOutline} className="menu-icon"></IonIcon>
-                            <IonLabel className="menu-label">Logout</IonLabel>
-                        </IonItem>
+                        {isLoggedIn && (
+                            <IonItem button onClick={handleLogout} className="menu-item">
+                                <IonIcon slot="start" icon={leafOutline} className="menu-icon"></IonIcon>
+                                <IonLabel className="menu-label">Logout</IonLabel>
+                            </IonItem>
+                        )}
                     </IonList>
                 </IonContent>
             </IonMenu>

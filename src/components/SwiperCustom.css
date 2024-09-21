@@ -2,15 +2,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    overflow: hidden; /* Menyembunyikan bagian yang keluar dari container */
 }
 
 .custom-swiper-news img {
     width: 100%;
     height: auto;
-    max-height: 200px;
-    min-height: 200px;
     object-fit: cover;
-    /* border-radius: 20px; */
-
+    /* Tinggi adaptif berdasarkan viewport */
+    min-height: 30vh; /* 30% dari tinggi viewport */
+    max-height: 30vh; /* 30% dari tinggi viewport */
 }
+
+@media (min-width: 768px) {
+    .custom-swiper-news img {
+        /* Tinggi tetap untuk desktop */
+        min-height: 200px;
+        max-height: 200px;
+    }
+}
+
+
+.custom-card-swiper{
+    margin: 0;
+  }
+  .custom-card-title-swiper{
+    font-size: 21px;
+  }
+  

@@ -1,3 +1,4 @@
+-- Active: 1717315982798@@127.0.0.1@3306@ApiJepang
 apply plugin: 'com.android.application'
 
 android {
@@ -20,6 +21,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }

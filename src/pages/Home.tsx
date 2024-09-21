@@ -31,11 +31,13 @@ import '@ionic/react/css/ionic-swiper.css';
 import logo_kanji from '../assets/images/logo-kanji.png';
 import logo_kotoba from '../assets/images/logo-kotoba.png';
 import logo_ujian from '../assets/images/logo-ujian.png';
+import logo_toa from '../assets/images/logo-toa.png';
 import './HomePage.scss';
 import { home, repeatOutline, search } from 'ionicons/icons';
 import logo_mahkota from '../assets/images/mahkota.png';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
+import SwiperBanner from '../components/SwiperBanner';
 import SwiperNews from '../components/SwiperNews';
 
 const HomePage: React.FC = () => {
@@ -92,7 +94,9 @@ const HomePage: React.FC = () => {
           <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-          <SwiperNews></SwiperNews>
+          <SwiperBanner></SwiperBanner>
+
+          
 
           <IonCard>
             <IonGrid>
@@ -116,9 +120,18 @@ const HomePage: React.FC = () => {
                   </a>
                 </IonCol>
 
+                {/* <IonCol className="menu-item" onClick={() => history.push('/ujian')}>
+                  <a className="custom-button-menu" href="">
+                    <img className="custom-icon-menu" src={logo_toa}></img>
+                    <p>Pembagian Meja</p>
+                  </a>
+                </IonCol> */}
+
               </IonRow>
             </IonGrid>
           </IonCard>
+
+
           {/* <h4 className='custom-judul-line'>Berita</h4> */}
           {/* <IonCard>
             {items.map((item, index) => (
@@ -141,6 +154,8 @@ const HomePage: React.FC = () => {
               <IonInfiniteScrollContent></IonInfiniteScrollContent>
             </IonInfiniteScroll>
           </IonCard> */}
+
+          <SwiperNews></SwiperNews>
 
           <IonCard>
             <div className='custom-button-container'>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonCard, IonCardContent, IonLoading, IonRadioGroup, IonRadio } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonCard, IonCardContent, IonLoading, IonRadioGroup, IonRadio, IonToast, IonModal, IonCardTitle, IonCardHeader } from '@ionic/react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../pages/HomePage.scss';
@@ -9,9 +9,13 @@ const ViewUjian: React.FC = () => {
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: string }>({});
     const [countdown, setCountdown] = useState('');
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [quizDone, setquizDone] = useState<boolean>(false);
     const [tokenVerified, setTokenVerified] = useState<boolean>(false);
 
-
+    const [showToast, setShowToast] = useState<boolean>(false);
+    const [toastMessage, setToastMessage] = useState<string>('');
+    const [score, setScore] = useState<number | null>(null);
+    const [showModal, setShowModal] = useState(false);
 
     interface Params {
         id: string;
@@ -36,6 +40,9 @@ const ViewUjian: React.FC = () => {
 
     const [soal, setSoal] = useState<Soal[]>([]);
 
+    const [userId, setUserId] = useState<number | null>(null);
+
+
     const handleSelect = (soalId: number, value: string) => {
         if (countdown !== 'Waktu telah habis') {
             setSelectedAnswers(prev => ({ ...prev, [soalId]: value }));
@@ -44,23 +51,66 @@ const ViewUjian: React.FC = () => {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         let correctAnswers = 0;
         const userAnswers: any[] = [];
+
         soal.forEach(s => {
-            const userAnswer = selectedAnswers[s.id];
+            let userAnswer = selectedAnswers[s.id];
+            if (!userAnswer) {
+                userAnswer = "";
+            }
+
             if (userAnswer === s.correct_answer) {
                 correctAnswers++;
             }
+
             userAnswers.push({ soalId: s.id, jawaban: userAnswer });
         });
-        console.log("Jawaban Pengguna:", userAnswers);
-        alert(`Anda menjawab ${correctAnswers} dari ${soal.length} soal dengan benar.`);
+
+        const ujian_id = id;
+
+        const result = {
+            user_id: userId,
+            ujian_id: ujian_id,
+            hasil_ujian: userAnswers
+        };
+
+        // Tidak perlu membungkus dalam 'resultJSON'
+        try {
+            const response = await axios.post('https://api.haudy.my.id/api/ujian/submit', result,  // Kirim 'result' langsung
+                {
+                    headers: {
+                        'x-api-key': 'dewa',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+
+
+            if (response.data.message == 'Pengecekan selesai.') {
+                // console.log("Response dari API: ", response.data);
+                setScore(response.data.total_points);
+                setShowModal(true);
+                setquizDone(true);
+
+            } else if (response.data.message == 'Hasil ujian sudah ada untuk user ini.') {
+                setquizDone(true);
+            }
+
+
+
+        } catch (e: any) {
+            // console.error(e.response?.data || e.message);
+            setToastMessage('Gagal Mengirim Data');
+            setShowToast(true);
+        }
     };
+
 
     const fetchSoal = async () => {
         try {
-            const response = await axios.get(`https://api.haudy.my.id/api/ujian/soal/${id}`,{
+            const response = await axios.get(`https://api.haudy.my.id/api/ujian/soal/${id}`, {
                 headers: {
                     'x-api-key': 'dewa'
                 }
@@ -68,7 +118,7 @@ const ViewUjian: React.FC = () => {
             setIsLoading(false);
             setSoal(response.data);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             setIsLoading(false);
         }
 
@@ -89,6 +139,7 @@ const ViewUjian: React.FC = () => {
                 history.push('/home');
                 return null;
             } else {
+                setUserId(response.data.user_id);
                 return response.data;
             }
         } catch (error) {
@@ -145,7 +196,10 @@ const ViewUjian: React.FC = () => {
                     <IonButtons slot="start">
                         <IonBackButton defaultHref="/home" />
                     </IonButtons>
-                    <IonTitle>Waktu Ujian : {countdown}</IonTitle>
+                    {!quizDone && (
+                        <IonTitle>Waktu Ujian : {countdown}</IonTitle>
+                    )}
+
                 </IonToolbar>
             </IonHeader>
             <IonContent>
@@ -156,61 +210,96 @@ const ViewUjian: React.FC = () => {
 
                                 <>
                                     {isLoading ? (
-
                                         <IonLoading
                                             isOpen={isLoading}
                                             message={'Fetching data...'}
                                             duration={1000}
                                         />
                                     ) : (
-                                        countdown !== 'Waktu telah habis' ? (
-                                            soal.map(s => (
-                                                <IonList key={s.id} className='custom-list'>
-                                                    {s.image_url && (
-                                                        <IonItem className='border-0'>
-                                                            <img src={`https://api.haudy.my.id/storage/${s.image_url}`} alt="Question related" style={{ maxWidth: '100%' }} />
-                                                        </IonItem>
-                                                    )}
-                                                    {s.audio_url && (
-                                                        <IonItem>
-                                                            <audio controls>
-                                                                <source src={`https://api.haudy.my.id/storage/${s.audio_url}`} type="audio/mpeg" />
-                                                                Your browser does not support the audio element.
-                                                            </audio>
-                                                        </IonItem>
-                                                    )}
-                                                    <IonItem className='border-0'>
-                                                        <IonLabel>{s.question}</IonLabel>
-                                                    </IonItem>
-
-                                                    <IonRadioGroup value={selectedAnswers[s.id]} onIonChange={e => handleSelect(s.id, e.detail.value)}>
-                                                        {s.choices.map((c, index) => (
-                                                            <IonItem key={index}>
-                                                                <IonRadio slot="start" value={c} aria-label={String(c)}></IonRadio>
-                                                                <IonLabel>{String(c)}</IonLabel>
-                                                            </IonItem>
-                                                        ))}
-                                                    </IonRadioGroup>
-                                                </IonList>
-                                            ))
-                                        ) : (
+                                        quizDone ? (
                                             <IonItem>
-                                                <IonLabel>Waktu telah habis. Anda tidak dapat menjawab soal lagi.</IonLabel>
+                                                <IonLabel>Ujian Telah Diselesaikan</IonLabel>
                                             </IonItem>
+                                        ) : (
+                                            countdown !== 'Waktu telah habis' ? (
+                                                soal.map(s => (
+                                                    <IonList key={s.id} className='custom-list'>
+                                                        {s.image_url && (
+                                                            <IonItem className='border-0'>
+                                                                <img src={`https://api.haudy.my.id/storage/${s.image_url}`} alt="Question related" style={{ maxWidth: '100%' }} />
+                                                            </IonItem>
+                                                        )}
+                                                        {s.audio_url && (
+                                                            <IonItem>
+                                                                <audio controls>
+                                                                    <source src={`https://api.haudy.my.id/storage/${s.audio_url}`} type="audio/mpeg" />
+                                                                    Your browser does not support the audio element.
+                                                                </audio>
+                                                            </IonItem>
+                                                        )}
+                                                        <IonItem className='border-0'>
+                                                            <IonLabel className='border-0'>{s.question}</IonLabel>
+                                                        </IonItem>
+
+                                                        <IonRadioGroup value={selectedAnswers[s.id]} onIonChange={e => handleSelect(s.id, e.detail.value)}>
+                                                            {s.choices.map((c, index) => (
+                                                                <IonItem className='border-0' key={index}>
+                                                                    <IonRadio slot="start" value={c} aria-label={String(c)}></IonRadio>
+                                                                    <IonLabel className='border-0'>{String(c)}</IonLabel>
+                                                                </IonItem>
+                                                            ))}
+                                                        </IonRadioGroup>
+                                                    </IonList>
+                                                ))
+                                            ) : (
+                                                <IonItem>
+                                                    <IonLabel>Waktu telah habis. Anda tidak dapat menjawab soal lagi.</IonLabel>
+                                                </IonItem>
+                                            )
                                         )
                                     )}
+
                                 </>
                             </IonCard>
                         </IonCol>
+
+                        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)} backdropDismiss={false} >
+                            <IonContent>
+                                <IonCard>
+                                    <IonCardContent>
+                                        <IonCardTitle>Hasil Ujian Anda</IonCardTitle>
+
+                                        <br />
+
+                                        <p>Skor : {score}</p>
+                                        <br />
+                                        <button onClick={() => setShowModal(false)}>
+                                            Tutup
+                                        </button>
+                                    </IonCardContent>
+                                </IonCard>
+                            </IonContent>
+                        </IonModal>
+
+
                     </IonRow>
 
                     <IonRow>
+
+
                         <IonCol size="12">
-                            {countdown !== 'Waktu telah habis' && (
+                            {countdown !== 'Waktu telah habis' && !quizDone && (
                                 <IonButton color="dark" expand="block" onClick={handleSubmit}>Selesai</IonButton>
                             )}
                         </IonCol>
+
                     </IonRow>
+                    <IonToast
+                        isOpen={showToast}
+                        onDidDismiss={() => setShowToast(false)}
+                        message={toastMessage}
+                        duration={2000}
+                    ></IonToast>
                 </IonGrid>
             </IonContent>
         </IonPage>

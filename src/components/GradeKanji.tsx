@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IonLoading, IonButton, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton } from '@ionic/react';
+import { IonLoading, IonButton, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonCol, IonGrid, IonRow, IonIcon, IonList, IonLabel, IonItem, IonButtons, IonBackButton, IonCard, IonCardContent } from '@ionic/react';
 import { Redirect, Route, useHistory, useParams } from 'react-router-dom';
 
 import '../pages/HomePage.scss';
@@ -73,9 +73,11 @@ const GradeKanji: React.FC = () => {
                             ) : kanjiList.length > 0 ? (
                                 kanjiList.map((kanji, index) => (
                                     <IonCol key={index} className="menu-item" onClick={() => history.push('/kanji/' + grade + "/" + kanji)}>
-                                        <div>
-                                            {kanji}
-                                        </div>
+                                        <IonCard className="custom-card-content-kanji">
+                                            <IonCardContent >
+                                                {kanji}
+                                            </IonCardContent>
+                                        </IonCard>
                                     </IonCol>
                                 ))
                             ) : (

@@ -1,6 +1,5 @@
-
 body {
-  font-family: 'ヒラギノ角ゴ Pro W3', sans-serif;
+  font-family: "ヒラギノ角ゴ Pro W3", sans-serif;
 }
 
 .button-menu {
@@ -58,7 +57,7 @@ body {
 
 .custom-icon-menu {
   width: 40px;
-  height: 40px;
+  max-height: 30px;
   object-fit: contain; // Agar gambar tetap proporsional
 }
 
@@ -204,14 +203,14 @@ ion-fab-button::part(native):active::after {
   background-color: #b90404;
 }
 
-.border-0{
-  border: 0 !important;
-}
-
-.custom-list{
+.custom-list {
   box-shadow: -4px -4px 10px rgba(0, 0, 0, 0.2);
   // padding: 0 !important;
   // margin: 0 !important;
+}
+
+.border-0 {
+  --ion-border-color: transparent;
 }
 
 .avatar-row {
@@ -236,7 +235,8 @@ ion-fab-button::part(native):active::after {
   justify-content: center;
 }
 
-.user-name, .user-poin {
+.user-name,
+.user-poin {
   font-size: 15px;
   color: #333;
 }
@@ -244,6 +244,94 @@ ion-fab-button::part(native):active::after {
 .jisho-logo {
   display: block;
   margin: 0 auto;
+  // margin-top: 10px;
   width: 100px;
 }
+
+.up-coming-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(243, 209, 18);
+  color: white;
+  padding: 2px 5px;
+  font-size: 12px;
+  border-radius: 0 0 0 5px; /* Rounded bottom-left corner */
+}
+.custom-card-content-kanji {
+  margin: 0px;
+  color: black;
+}
+.custom-card-content-kanji:hover {
+  scale: calc(1.4);
+}
+
+.custom-modal-content-kotoba {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.login-btn-sidebar {
+  color: #b90404;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+// @media (max-width: 750px) {
+//   .swiper-slide:last-child .custom-button-news {
+//     transform: scale(1.4); /* Membuat gambar 20% lebih besar */
+//     transition: transform 0.3s ease-in-out; /* Animasi perubahan ukuran */
+//   }
+
+//   // .swiper-slide:first-child .custom-button-news {
+//   //   transform: scale(1.4); /* Membuat gambar 20% lebih besar */
+//   //   transition: transform 0.3s ease-in-out; /* Animasi perubahan ukuran */
+//   // }
+
+//   .swiper-slide:not(:last-child) .custom-button-news {
+//     transform: scale(0.9); /* Membuat gambar 10% lebih kecil */
+//     transition: transform 0.3s ease-in-out; /* Animasi perubahan ukuran */
+//   }
+// }
+
+
+
+// .custom-button-news {
+//   // margin: 5px;
+//   border: #333 1px solid;
+ 
+//   max-height: 200px;
+//   min-height: 200px;
+//   img {
+//     width: 100%; // Pastikan gambar memenuhi lebar penuh
+//     height: 100%; // Pastikan gambar memenuhi tinggi penuh
+//     object-fit: cover; // Gambar akan menutupi area tanpa mengubah rasio aspek
+//     object-position: center; // Pusatkan gambar
+//   }
+// }
+
+// .custom-card-content{
+//   max-height: 150px;
+// }
+// .custom-ion-card-news{
+//   margin: 10px;
+// }
+
+// .custom-card-lable{
+//   max-height: 150px;
+//   text-decoration: none;
+//   color: #333;
+//   overflow: auto;
+//   text-align: left;
+//   padding: 15px;
+//   font-size: 14px;
+//   margin-bottom: 10px;
+// }
+
+
+
+
+
+
+
+
 

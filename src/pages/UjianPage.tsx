@@ -123,7 +123,7 @@ const UjianPage: React.FC = () => {
             const token = tokenResponse.token;
 
             if (selectedId !== null) {
-                history.push(`/ujian/${selectedId}/${token}/${encodeURIComponent(format(endTime, 'yyyy-MM-dd HH:mm:ss'))}`);
+                history.push(`/ujian/${selectedId}/${token}/${encodeURIComponent(format(tokenResponse.expired, 'yyyy-MM-dd HH:mm:ss'))}`);
             }
             setShowModal(false);
         } catch (error) {
@@ -175,7 +175,9 @@ const UjianPage: React.FC = () => {
                                         onClick={() => !isExamEnded && goToUjian(item.id, item)}
                                         style={{
                                             opacity: isExamEnded ? 0.5 : 1,
-                                            pointerEvents: isExamEnded ? 'none' : 'auto'
+                                            pointerEvents: isExamEnded ? 'none' : 'auto',
+                                            position: 'relative', // Ensure the relative positioning for the absolute label
+                                            
                                         }}
                                     >
                                         <IonThumbnail slot="start">
@@ -197,8 +199,13 @@ const UjianPage: React.FC = () => {
                                                     </p>
                                                 </>
                                             )}
-                                        </IonLabel>
 
+
+                                            {/* Menambahkan label Up-Coming jika ujian belum dimulai */}
+                                            {!isExamEnded && new Date() < new Date(item.start_time) && (
+                                                <div className="up-coming-label">Belum Dimulai</div>
+                                            )}
+                                        </IonLabel>
                                     </IonItem>
                                 );
                             })}
@@ -224,7 +231,7 @@ const UjianPage: React.FC = () => {
                     <IonCard>
 
                         <IonCardContent>
-                        <IonCardTitle>{dataUjianSelect?.title}</IonCardTitle>
+                            <IonCardTitle>{dataUjianSelect?.title}</IonCardTitle>
 
                             <br />
 
