@@ -37,23 +37,24 @@ const SwiperNews: React.FC = () => {
                     <IonCard className='custom-card-swiper'>
                         <img alt="Gambar 1" src={gambar1} className="custom-image-news" />
                         <IonCardHeader>
-                            <IonCardTitle className='custom-card-title-swiper'>Card Title</IonCardTitle>
-                            <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+                            <IonCardTitle className='custom-card-title-swiper'>Pemegang Visa TG...</IonCardTitle>
+                            <IonCardSubtitle></IonCardSubtitle>
                         </IonCardHeader>
 
-                        <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
+                        <IonCardContent>SSW yang telah 5 tahun di Jepang diperpanjang 5 tahun lagi..
+                        </IonCardContent>
                     </IonCard>
                 </SwiperSlide>
 
                 <SwiperSlide className="custom-swiper-news">
                     <IonCard className='custom-card-swiper'>
-                        <img alt="Gambar 1" src={gambar2}className="custom-image-news" />
+                        <img alt="Gambar 1" src={gambar2} className="custom-image-news" />
                         <IonCardHeader>
-                            <IonCardTitle className='custom-card-title-swiper'>Card Title</IonCardTitle>
-                            <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+                            <IonCardTitle className='custom-card-title-swiper'>Dapet JFT GERATIS ! ?</IonCardTitle>
+                            <IonCardSubtitle></IonCardSubtitle>
                         </IonCardHeader>
 
-                        <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
+                        <IonCardContent>Terdapat Informasi Cara mendapatkan JFT geratis Dari Akun Ig Bernama...</IonCardContent>
                     </IonCard>
                 </SwiperSlide>
 
@@ -61,15 +62,15 @@ const SwiperNews: React.FC = () => {
                     <IonCard className='custom-card-swiper'>
                         <img alt="Gambar 1" src={gambar3} className="custom-image-news" />
                         <IonCardHeader>
-                            <IonCardTitle className='custom-card-title-swiper'>Card Title</IonCardTitle>
-                            <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+                            <IonCardTitle className='custom-card-title-swiper'>5 Cara Mendapatkan Tobrut wkwkw</IonCardTitle>
+                            <IonCardSubtitle></IonCardSubtitle>
                         </IonCardHeader>
 
-                        <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
+                        <IonCardContent>Ini Admin Gabut.s.</IonCardContent>
                     </IonCard>
                 </SwiperSlide>
 
-                
+
 
                 {/* <SwiperSlide className="custom-swiper-news">
                     <a className="custom-button-news" href="">

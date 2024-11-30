@@ -78,7 +78,7 @@ const ViewUjian: React.FC = () => {
 
         // Tidak perlu membungkus dalam 'resultJSON'
         try {
-            const response = await axios.post('https://api.haudy.my.id/api/ujian/submit', result,  // Kirim 'result' langsung
+            const response = await axios.post('https://api.haudy.my.id/api/ujian/submit', result,  
                 {
                     headers: {
                         'x-api-key': 'dewa',

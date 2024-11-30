@@ -1,0 +1,1260 @@
+{
+    "categories": [
+        {
+            "jenis_kotoba": "からだのことば",
+            "kata": [
+                {
+                    "kanji": "頭",
+                    "kana": "あたま",
+                    "arti": "kepala"
+                },
+                {
+                    "kanji": "額",
+                    "kana": "ひたい",
+                    "arti": "dahi"
+                },
+                {
+                    "kanji": "目",
+                    "kana": "め",
+                    "arti": "mata"
+                },
+                {
+                    "kanji": "耳",
+                    "kana": "みみ",
+                    "arti": "telinga"
+                },
+                {
+                    "kanji": "鼻",
+                    "kana": "はな",
+                    "arti": "hidung"
+                },
+                {
+                    "kanji": "唇",
+                    "kana": "くちびる",
+                    "arti": "bibir"
+                },
+                {
+                    "kanji": "首",
+                    "kana": "くび",
+                    "arti": "leher"
+                },
+                {
+                    "kanji": "喉",
+                    "kana": "のど",
+                    "arti": "tenggorokan"
+                },
+                {
+                    "kanji": "腕",
+                    "kana": "うで",
+                    "arti": "lengan"
+                },
+                {
+                    "kanji": "肘",
+                    "kana": "ひじ",
+                    "arti": "siku"
+                },
+                {
+                    "kanji": "腰",
+                    "kana": "こし",
+                    "arti": "pinggang"
+                },
+                {
+                    "kanji": "手首",
+                    "kana": "てくび",
+                    "arti": "pergelangan tangan"
+                },
+                {
+                    "kanji": "手のひら",
+                    "kana": "てのひら",
+                    "arti": "telapak tangan"
+                },
+                {
+                    "kanji": "指",
+                    "kana": "ゆび",
+                    "arti": "jari"
+                },
+                {
+                    "kanji": "指先",
+                    "kana": "ゆびさき",
+                    "arti": "ujung jari"
+                },
+                {
+                    "kanji": "手の甲",
+                    "kana": "てのこう",
+                    "arti": "punggung tangan"
+                },
+                {
+                    "kanji": "足首",
+                    "kana": "あしくび",
+                    "arti": "pergelangan kaki"
+                },
+                {
+                    "kanji": "肩",
+                    "kana": "かた",
+                    "arti": "bahu"
+                },
+                {
+                    "kanji": "背中",
+                    "kana": "せなか",
+                    "arti": "punggung"
+                },
+                {
+                    "kanji": "胸",
+                    "kana": "むね",
+                    "arti": "dada"
+                },
+                {
+                    "kanji": "殿部（尻）",
+                    "kana": "でんぶ（しり）",
+                    "arti": "bokong"
+                },
+                {
+                    "kanji": "腹",
+                    "kana": "はら",
+                    "arti": "perut"
+                },
+                {
+                    "kanji": "膝",
+                    "kana": "ひざ",
+                    "arti": "lutut"
+                },
+                {
+                    "kanji": "踵",
+                    "kana": "かかと",
+                    "arti": "tumit"
+                },
+                {
+                    "kanji": "足底（足の裏）",
+                    "kana": "そくてい（あしのうら）",
+                    "arti": "telapak kaki"
+                },
+                {
+                    "kanji": "顔色",
+                    "kana": "かおいろ",
+                    "arti": "warna wajah"
+                },
+                {
+                    "kanji": "患側",
+                    "kana": "かんそく",
+                    "arti": "sisi yang sakit"
+                },
+                {
+                    "kanji": "健側",
+                    "kana": "けんそく",
+                    "arti": "sisi yang sehat"
+                },
+                {
+                    "kanji": "健康",
+                    "kana": "けんこう",
+                    "arti": "kesehatan"
+                },
+                {
+                    "kanji": "体調",
+                    "kana": "たいちょう",
+                    "arti": "kondisi tubuh"
+                },
+                {
+                    "kanji": "バイタルサイン",
+                    "kana": "ばいたるさいん",
+                    "arti": "tanda vital"
+                },
+                {
+                    "kanji": "つま先",
+                    "kana": "つまさき",
+                    "arti": "ujung kaki"
+                },
+                {
+                    "kanji": "口",
+                    "kana": "くち",
+                    "arti": "mulut"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "体位",
+            "kata": [
+                {
+                    "kanji": "体位",
+                    "kana": "たいい",
+                    "arti": "posisi tubuh"
+                },
+                {
+                    "kanji": "体位変換",
+                    "kana": "たいいへんかん",
+                    "arti": "perubahan posisi tubuh"
+                },
+                {
+                    "kanji": "姿勢",
+                    "kana": "しせい",
+                    "arti": "postur tubuh"
+                },
+                {
+                    "kanji": "仰臥位",
+                    "kana": "ぎょうがい",
+                    "arti": "posisi terlentang"
+                },
+                {
+                    "kanji": "側臥位",
+                    "kana": "そくがい",
+                    "arti": "posisi miring"
+                },
+                {
+                    "kanji": "腹臥位",
+                    "kana": "ふくがい",
+                    "arti": "posisi tengkurap"
+                },
+                {
+                    "kanji": "端座位",
+                    "kana": "たんざい",
+                    "arti": "posisi duduk di tepi"
+                },
+                {
+                    "kanji": "立位",
+                    "kana": "りつい",
+                    "arti": "posisi berdiri"
+                },
+                {
+                    "kanji": "椅座位（座位）",
+                    "kana": "いざい（ざい）",
+                    "arti": "posisi duduk di kursi"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "病気",
+            "kata": [
+                {
+                    "kanji": "インフルエンザ",
+                    "kana": "いんふるえんざ",
+                    "arti": "influenza"
+                },
+                {
+                    "kanji": "疥癬",
+                    "kana": "かいせん",
+                    "arti": "skabies (kudis)"
+                },
+                {
+                    "kanji": "風邪",
+                    "kana": "かぜ",
+                    "arti": "pilek"
+                },
+                {
+                    "kanji": "高血圧症",
+                    "kana": "こうけつあつしょう",
+                    "arti": "hipertensi"
+                },
+                {
+                    "kanji": "食中毒",
+                    "kana": "しょくちゅうどく",
+                    "arti": "keracunan makanan"
+                },
+                {
+                    "kanji": "認知症",
+                    "kana": "にんちしょう",
+                    "arti": "demensia"
+                },
+                {
+                    "kanji": "白内障",
+                    "kana": "はくないしょう",
+                    "arti": "katarak"
+                },
+                {
+                    "kanji": "ノロウイルス",
+                    "kana": "のろういるす",
+                    "arti": "norovirus"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "症状",
+            "kata": [
+                {
+                    "kanji": "痛い",
+                    "kana": "いたい",
+                    "arti": "sakit (nyeri)"
+                },
+                {
+                    "kanji": "嘔吐",
+                    "kana": "おうと",
+                    "arti": "muntah"
+                },
+                {
+                    "kanji": "片麻痺",
+                    "kana": "かたまひ",
+                    "arti": "hemiplegia (kelumpuhan sebelah tubuh)"
+                },
+                {
+                    "kanji": "苦しい",
+                    "kana": "くるしい",
+                    "arti": "sulit bernapas; menyakitkan"
+                },
+                {
+                    "kanji": "下痢",
+                    "kana": "げり",
+                    "arti": "diare"
+                },
+                {
+                    "kanji": "拘縮",
+                    "kana": "こうしゅく",
+                    "arti": "kekakuan otot"
+                },
+                {
+                    "kanji": "骨折",
+                    "kana": "こっせつ",
+                    "arti": "patah tulang"
+                },
+                {
+                    "kanji": "症状",
+                    "kana": "しょうじょう",
+                    "arti": "gejala"
+                },
+                {
+                    "kanji": "褥瘡",
+                    "kana": "じょくそう",
+                    "arti": "luka tekan"
+                },
+                {
+                    "kanji": "咳",
+                    "kana": "せき",
+                    "arti": "batuk"
+                },
+                {
+                    "kanji": "吐き気",
+                    "kana": "はきけ",
+                    "arti": "mual"
+                },
+                {
+                    "kanji": "発汗",
+                    "kana": "はっかん",
+                    "arti": "berkeringat"
+                },
+                {
+                    "kanji": "発疹",
+                    "kana": "ほっしん",
+                    "arti": "ruam"
+                },
+                {
+                    "kanji": "発熱",
+                    "kana": "はつねつ",
+                    "arti": "demam"
+                },
+                {
+                    "kanji": "便秘",
+                    "kana": "べんぴ",
+                    "arti": "sembelit"
+                },
+                {
+                    "kanji": "かゆい",
+                    "kana": "かゆい",
+                    "arti": "gatal"
+                },
+                {
+                    "kanji": "めまい",
+                    "kana": "めまい",
+                    "arti": "pusing"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "PERAWATAN LANSIA UNTUK BERPINDAH",
+            "kata": [
+                {
+                    "kanji": "移乗",
+                    "kana": "いじょう",
+                    "arti": "pemindahan (dari tempat ke tempat lain, misalnya kursi roda ke tempat tidur)"
+                },
+                {
+                    "kanji": "移動",
+                    "kana": "いどう",
+                    "arti": "pergerakan; berpindah"
+                },
+                {
+                    "kanji": "起き上がる",
+                    "kana": "おきあがる",
+                    "arti": "bangun dari posisi berbaring"
+                },
+                {
+                    "kanji": "臥床",
+                    "kana": "がしょう",
+                    "arti": "berbaring di tempat tidur"
+                },
+                {
+                    "kanji": "車いす",
+                    "kana": "くるまいす",
+                    "arti": "kursi roda"
+                },
+                {
+                    "kanji": "声かけ",
+                    "kana": "こえかけ",
+                    "arti": "berkomunikasi (memberi instruksi dengan suara)"
+                },
+                {
+                    "kanji": "支える",
+                    "kana": "ささえる",
+                    "arti": "menopang; mendukung"
+                },
+                {
+                    "kanji": "杖",
+                    "kana": "つえ",
+                    "arti": "tongkat"
+                },
+                {
+                    "kanji": "手すり",
+                    "kana": "てすり",
+                    "arti": "pegangan tangan (railing)"
+                },
+                {
+                    "kanji": "歩行器",
+                    "kana": "ほこうき",
+                    "arti": "alat bantu jalan"
+                },
+                {
+                    "kanji": "誘導",
+                    "kana": "ゆうどう",
+                    "arti": "mengarahkan; membimbing"
+                },
+                {
+                    "kanji": "離床",
+                    "kana": "りしょう",
+                    "arti": "bangun dari tempat tidur"
+                },
+                {
+                    "kanji": "介護職",
+                    "kana": "かいごしょく",
+                    "arti": "pekerja perawatan (caregiver)"
+                },
+                {
+                    "kanji": "ブレーキをかける",
+                    "kana": "ぶれーきをかける",
+                    "arti": "mengaktifkan rem"
+                },
+                {
+                    "kanji": "つかまる",
+                    "kana": "つかまる",
+                    "arti": "berpegangan"
+                },
+                {
+                    "kanji": "ブレーキ",
+                    "kana": "ぶれーき",
+                    "arti": "rem"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "PERAWATAN LANSIA UNTUK MAKAN",
+            "kata": [
+                {
+                    "kanji": "嚥下",
+                    "kana": "えんげ",
+                    "arti": "menelan"
+                },
+                {
+                    "kanji": "誤嚥",
+                    "kana": "ごえん",
+                    "arti": "tersedak"
+                },
+                {
+                    "kanji": "食品",
+                    "kana": "しょくひん",
+                    "arti": "makanan"
+                },
+                {
+                    "kanji": "水分補給",
+                    "kana": "すいぶんほきゅう",
+                    "arti": "asupan cairan"
+                },
+                {
+                    "kanji": "咳込む",
+                    "kana": "せきこむ",
+                    "arti": "batuk"
+                },
+                {
+                    "kanji": "飲み込み",
+                    "kana": "のみこみ",
+                    "arti": "proses menelan"
+                },
+                {
+                    "kanji": "量",
+                    "kana": "りょう",
+                    "arti": "jumlah"
+                },
+                {
+                    "kanji": "エプロン",
+                    "kana": "えぷろん",
+                    "arti": "celemek"
+                },
+                {
+                    "kanji": "むせる",
+                    "kana": "むせる",
+                    "arti": "tercekik"
+                },
+                {
+                    "kanji": "リーダー",
+                    "kana": "りーだー",
+                    "arti": "pemimpin"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "KOSAKATA DAFTAR MAKANAN",
+            "kata": [
+                {
+                    "kanji": "お茶",
+                    "kana": "おちゃ",
+                    "arti": "teh"
+                },
+                {
+                    "kanji": "ご飯",
+                    "kana": "ごはん",
+                    "arti": "nasi"
+                },
+                {
+                    "kanji": "献立",
+                    "kana": "こんだて",
+                    "arti": "menu"
+                },
+                {
+                    "kanji": "献立表",
+                    "kana": "こんだてひょう",
+                    "arti": "daftar menu"
+                },
+                {
+                    "kanji": "主食",
+                    "kana": "しゅしょく",
+                    "arti": "makanan utama"
+                },
+                {
+                    "kanji": "汁物",
+                    "kana": "しるもの",
+                    "arti": "sup"
+                },
+                {
+                    "kanji": "漬物",
+                    "kana": "つけもの",
+                    "arti": "acar"
+                },
+                {
+                    "kanji": "豆腐",
+                    "kana": "とうふ",
+                    "arti": "tahu"
+                },
+                {
+                    "kanji": "丼",
+                    "kana": "どんぶり",
+                    "arti": "semangkuk nasi dengan lauk"
+                },
+                {
+                    "kanji": "煮付け",
+                    "kana": "にづけ",
+                    "arti": "ikan atau daging yang dimasak dengan bumbu"
+                },
+                {
+                    "kanji": "煮物",
+                    "kana": "にもの",
+                    "arti": "sayur atau bahan lain yang dimasak dengan kuah"
+                },
+                {
+                    "kanji": "副食",
+                    "kana": "ふくしょく",
+                    "arti": "makanan pelengkap"
+                },
+                {
+                    "kanji": "麦茶",
+                    "kana": "むぎちゃ",
+                    "arti": "teh barley"
+                },
+                {
+                    "kanji": "焼き魚",
+                    "kana": "やきざかな",
+                    "arti": "ikan bakar"
+                },
+                {
+                    "kanji": "カレーライス",
+                    "kana": "かれーらいす",
+                    "arti": "nasi kari"
+                },
+                {
+                    "kanji": "あげもの",
+                    "kana": "あげもの",
+                    "arti": "gorengan"
+                },
+                {
+                    "kanji": "いためもの",
+                    "kana": "いためもの",
+                    "arti": "masakan tumis"
+                },
+                {
+                    "kanji": "メニュー",
+                    "kana": "めにゅー",
+                    "arti": "menu"
+                },
+                {
+                    "kanji": "ヨーグルト",
+                    "kana": "よーぐると",
+                    "arti": "yogurt"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "PERAWATAN LANSIA UNTUK EKSRESI",
+            "kata": [
+                {
+                    "kanji": "足元",
+                    "kana": "あしもと",
+                    "arti": "kaki (posisi atau keadaan kaki)"
+                },
+                {
+                    "kanji": "陰部",
+                    "kana": "いんぶ",
+                    "arti": "organ genital"
+                },
+                {
+                    "kanji": "浣腸",
+                    "kana": "かんちょう",
+                    "arti": "enema"
+                },
+                {
+                    "kanji": "着替える",
+                    "kana": "きがえる",
+                    "arti": "berpakaian (berganti pakaian)"
+                },
+                {
+                    "kanji": "下げる",
+                    "kana": "さげる",
+                    "arti": "menurunkan (misalnya menurunkan celana)"
+                },
+                {
+                    "kanji": "失禁",
+                    "kana": "しっきん",
+                    "arti": "buang air tak terkendali (inkontinensia)"
+                },
+                {
+                    "kanji": "羞恥心",
+                    "kana": "しゅうちしん",
+                    "arti": "rasa malu"
+                },
+                {
+                    "kanji": "使い捨て手袋",
+                    "kana": "つかいすててぶくろ",
+                    "arti": "sarung tangan sekali pakai"
+                },
+                {
+                    "kanji": "尿",
+                    "kana": "にょう",
+                    "arti": "urine"
+                },
+                {
+                    "kanji": "尿意",
+                    "kana": "にょうい",
+                    "arti": "rasa ingin buang air kecil"
+                },
+                {
+                    "kanji": "排泄",
+                    "kana": "はいせつ",
+                    "arti": "ekskresi (buang air)"
+                },
+                {
+                    "kanji": "便",
+                    "kana": "べん",
+                    "arti": "tinja"
+                },
+                {
+                    "kanji": "便意",
+                    "kana": "べんい",
+                    "arti": "rasa ingin buang air besar"
+                },
+                {
+                    "kanji": "便座",
+                    "kana": "べんざ",
+                    "arti": "tempat duduk toilet"
+                },
+                {
+                    "kanji": "ポータブルトイレ",
+                    "kana": "ぽーたぶるといれ",
+                    "arti": "toilet portabel"
+                },
+                {
+                    "kanji": "看護職",
+                    "kana": "かんごしょく",
+                    "arti": "profesi perawat"
+                },
+                {
+                    "kanji": "職員",
+                    "kana": "しょくいん",
+                    "arti": "staf, karyawan"
+                },
+                {
+                    "kanji": "パジャマ",
+                    "kana": "ぱじゃま",
+                    "arti": "piyama"
+                },
+                {
+                    "kanji": "呼び出しボタン",
+                    "kana": "よびだしぼたん",
+                    "arti": "tombol panggilan"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "PERAWATAN LANSIA UNTUK MERAPIKAN DIRI",
+            "kata": [
+                {
+                    "kanji": "衣類",
+                    "kana": "いるい",
+                    "arti": "pakaian"
+                },
+                {
+                    "kanji": "入れ歯",
+                    "kana": "いれば",
+                    "arti": "gigi palsu"
+                },
+                {
+                    "kanji": "うがい",
+                    "kana": "うがい",
+                    "arti": "berkumur"
+                },
+                {
+                    "kanji": "上着",
+                    "kana": "うわぎ",
+                    "arti": "pakaian luar"
+                },
+                {
+                    "kanji": "着替え",
+                    "kana": "きがえ",
+                    "arti": "berganti pakaian"
+                },
+                {
+                    "kanji": "義歯",
+                    "kana": "ぎし",
+                    "arti": "gigi tiruan"
+                },
+                {
+                    "kanji": "起床",
+                    "kana": "きしょう",
+                    "arti": "bangun tidur"
+                },
+                {
+                    "kanji": "くし",
+                    "kana": "くし",
+                    "arti": "sisir"
+                },
+                {
+                    "kanji": "更衣",
+                    "kana": "こうい",
+                    "arti": "berpakaian (ganti pakaian)"
+                },
+                {
+                    "kanji": "口腔ケア",
+                    "kana": "こうくうけあ",
+                    "arti": "perawatan mulut"
+                },
+                {
+                    "kanji": "下着",
+                    "kana": "したぎ",
+                    "arti": "pakaian dalam"
+                },
+                {
+                    "kanji": "スカート",
+                    "kana": "すかーと",
+                    "arti": "rok"
+                },
+                {
+                    "kanji": "歯医者",
+                    "kana": "はいしゃ",
+                    "arti": "dokter gigi"
+                },
+                {
+                    "kanji": "歯ブラシ",
+                    "kana": "はぶらし",
+                    "arti": "sikat gigi"
+                },
+                {
+                    "kanji": "歯磨き",
+                    "kana": "はみがき",
+                    "arti": "pasta gigi"
+                },
+                {
+                    "kanji": "パンツ",
+                    "kana": "ぱんつ",
+                    "arti": "celana dalam"
+                },
+                {
+                    "kanji": "ひげ剃り",
+                    "kana": "ひげそり",
+                    "arti": "pencukur jenggot"
+                },
+                {
+                    "kanji": "みじたく",
+                    "kana": "みじたく",
+                    "arti": "merapikan diri"
+                },
+                {
+                    "kanji": "洋服",
+                    "kana": "ようふく",
+                    "arti": "pakaian (barat)"
+                },
+                {
+                    "kanji": "診察",
+                    "kana": "しんさつ",
+                    "arti": "pemeriksaan medis"
+                },
+                {
+                    "kanji": "左側",
+                    "kana": "ひだりがわ",
+                    "arti": "sisi kiri"
+                },
+                {
+                    "kanji": "右側",
+                    "kana": "みぎがわ",
+                    "arti": "sisi kanan"
+                },
+                {
+                    "kanji": "診る",
+                    "kana": "みる",
+                    "arti": "memeriksa (kesehatan)"
+                },
+                {
+                    "kanji": "夜中",
+                    "kana": "よなか",
+                    "arti": "tengah malam"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "PERAWATAN LANSIA UNTUK MANDI DAN MENJAGA KEBERSIHAN",
+            "kata": [
+                {
+                    "kanji": "温度",
+                    "kana": "おんど",
+                    "arti": "suhu"
+                },
+                {
+                    "kanji": "（汗を）かく",
+                    "kana": "（あせを）かく",
+                    "arti": "berkeringat"
+                },
+                {
+                    "kanji": "シャンプー",
+                    "kana": "しゃんぷー",
+                    "arti": "shampoo"
+                },
+                {
+                    "kanji": "消毒",
+                    "kana": "しょうどく",
+                    "arti": "disinfeksi"
+                },
+                {
+                    "kanji": "消毒液",
+                    "kana": "しょうどくえき",
+                    "arti": "larutan disinfektan"
+                },
+                {
+                    "kanji": "清潔保持",
+                    "kana": "せいけつほじ",
+                    "arti": "menjaga kebersihan"
+                },
+                {
+                    "kanji": "清拭",
+                    "kana": "せいしき",
+                    "arti": "pembersihan dengan lap basah"
+                },
+                {
+                    "kanji": "洗髪",
+                    "kana": "せんぱつ",
+                    "arti": "mencuci rambut"
+                },
+                {
+                    "kanji": "洗面",
+                    "kana": "せんめん",
+                    "arti": "mencuci muka"
+                },
+                {
+                    "kanji": "洗面器",
+                    "kana": "せんめんき",
+                    "arti": "basin cuci muka"
+                },
+                {
+                    "kanji": "脱衣室",
+                    "kana": "だついしつ",
+                    "arti": "ruang ganti pakaian"
+                },
+                {
+                    "kanji": "入浴",
+                    "kana": "にゅうよく",
+                    "arti": "mandi (berendam)"
+                },
+                {
+                    "kanji": "拭く",
+                    "kana": "ふく",
+                    "arti": "mengelap"
+                },
+                {
+                    "kanji": "浴室",
+                    "kana": "よくしつ",
+                    "arti": "kamar mandi"
+                },
+                {
+                    "kanji": "浴槽",
+                    "kana": "よくそう",
+                    "arti": "bak mandi"
+                },
+                {
+                    "kanji": "リンス",
+                    "kana": "りんす",
+                    "arti": "conditioner"
+                },
+                {
+                    "kanji": "確認",
+                    "kana": "かくにん",
+                    "arti": "konfirmasi"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "PERAWATAN LANSIA UNTUK PEKERJAAN RUMAH TANGGA",
+            "kata": [
+                {
+                    "kanji": "おしぼり",
+                    "kana": "おしぼり",
+                    "arti": "lap tangan basah"
+                },
+                {
+                    "kanji": "カーテン",
+                    "kana": "かーてん",
+                    "arti": "gorden"
+                },
+                {
+                    "kanji": "家事",
+                    "kana": "かじ",
+                    "arti": "pekerjaan rumah tangga"
+                },
+                {
+                    "kanji": "片付ける",
+                    "kana": "かたづける",
+                    "arti": "merapikan, membersihkan"
+                },
+                {
+                    "kanji": "乾かす",
+                    "kana": "かわかす",
+                    "arti": "mengeringkan"
+                },
+                {
+                    "kanji": "乾く",
+                    "kana": "かわく",
+                    "arti": "kering"
+                },
+                {
+                    "kanji": "換気",
+                    "kana": "かんき",
+                    "arti": "ventilasi, pengudaraan"
+                },
+                {
+                    "kanji": "ごみ箱",
+                    "kana": "ごみばこ",
+                    "arti": "tempat sampah"
+                },
+                {
+                    "kanji": "清掃",
+                    "kana": "せいそう",
+                    "arti": "pembersihan"
+                },
+                {
+                    "kanji": "洗濯",
+                    "kana": "せんたく",
+                    "arti": "mencuci"
+                },
+                {
+                    "kanji": "洗濯物",
+                    "kana": "せんたくもの",
+                    "arti": "pakaian kotor (untuk dicuci)"
+                },
+                {
+                    "kanji": "掃除",
+                    "kana": "そうじ",
+                    "arti": "membersihkan"
+                },
+                {
+                    "kanji": "たたむ",
+                    "kana": "たたむ",
+                    "arti": "melipat"
+                },
+                {
+                    "kanji": "調理",
+                    "kana": "ちょうり",
+                    "arti": "memasak"
+                },
+                {
+                    "kanji": "布団",
+                    "kana": "ふとん",
+                    "arti": "selimut, kasur Jepang"
+                },
+                {
+                    "kanji": "干す",
+                    "kana": "ほす",
+                    "arti": "menjemur"
+                },
+                {
+                    "kanji": "枕",
+                    "kana": "まくら",
+                    "arti": "bantal"
+                }
+            ]
+        },
+        {
+            "jenis_kotoba": "KOSAKATA UMUM",
+            "kata": [
+                {
+                    "kanji": "アルコール",
+                    "kana": "あるこーる",
+                    "arti": "alkohol"
+                },
+                {
+                    "kanji": "確認",
+                    "kana": "かくにん",
+                    "arti": "konfirmasi"
+                },
+                {
+                    "kanji": "観察",
+                    "kana": "かんさつ",
+                    "arti": "pengamatan"
+                },
+                {
+                    "kanji": "行事",
+                    "kana": "ぎょうじ",
+                    "arti": "acara, kegiatan"
+                },
+                {
+                    "kanji": "記録",
+                    "kana": "きろく",
+                    "arti": "catatan, rekaman"
+                },
+                {
+                    "kanji": "禁煙",
+                    "kana": "きんえん",
+                    "arti": "larangan merokok"
+                },
+                {
+                    "kanji": "禁止",
+                    "kana": "きんし",
+                    "arti": "larangan"
+                },
+                {
+                    "kanji": "計画",
+                    "kana": "けいかく",
+                    "arti": "rencana"
+                },
+                {
+                    "kanji": "掲示",
+                    "kana": "けいじ",
+                    "arti": "pemberitahuan, pengumuman"
+                },
+                {
+                    "kanji": "ケース",
+                    "kana": "けーす",
+                    "arti": "kasus, kotak"
+                },
+                {
+                    "kanji": "県",
+                    "kana": "けん",
+                    "arti": "prefektur"
+                },
+                {
+                    "kanji": "玄関",
+                    "kana": "げんかん",
+                    "arti": "pintu masuk"
+                },
+                {
+                    "kanji": "参加者",
+                    "kana": "さんかしゃ",
+                    "arti": "peserta"
+                },
+                {
+                    "kanji": "参加",
+                    "kana": "さんか",
+                    "arti": "partisipasi"
+                },
+                {
+                    "kanji": "事故",
+                    "kana": "じこ",
+                    "arti": "kecelakaan"
+                },
+                {
+                    "kanji": "施設",
+                    "kana": "しせつ",
+                    "arti": "fasilitas"
+                },
+                {
+                    "kanji": "就寝",
+                    "kana": "しゅうしん",
+                    "arti": "tidur, beristirahat"
+                },
+                {
+                    "kanji": "出勤",
+                    "kana": "しゅっきん",
+                    "arti": "berangkat kerja"
+                },
+                {
+                    "kanji": "巡視",
+                    "kana": "じゅんし",
+                    "arti": "patroli"
+                },
+                {
+                    "kanji": "使用",
+                    "kana": "しよう",
+                    "arti": "penggunaan"
+                },
+                {
+                    "kanji": "状況",
+                    "kana": "じょうきょう",
+                    "arti": "situasi"
+                },
+                {
+                    "kanji": "ショートステイ",
+                    "kana": "しょーとすてい",
+                    "arti": "tinggal sementara"
+                },
+                {
+                    "kanji": "自立",
+                    "kana": "じりつ",
+                    "arti": "kemandirian"
+                },
+                {
+                    "kanji": "スケジュール",
+                    "kana": "すけじゅーる",
+                    "arti": "jadwal"
+                },
+                {
+                    "kanji": "送迎車",
+                    "kana": "そうげいしゃ",
+                    "arti": "mobil antar-jemput"
+                },
+                {
+                    "kanji": "退勤",
+                    "kana": "たいきん",
+                    "arti": "pulang kerja"
+                },
+                {
+                    "kanji": "タイヤ",
+                    "kana": "たいや",
+                    "arti": "ban"
+                },
+                {
+                    "kanji": "建物",
+                    "kana": "たてもの",
+                    "arti": "bangunan"
+                },
+                {
+                    "kanji": "担当者",
+                    "kana": "たんとうしゃ",
+                    "arti": "penanggung jawab"
+                },
+                {
+                    "kanji": "調理員",
+                    "kana": "ちょうりいん",
+                    "arti": "petugas dapur"
+                },
+                {
+                    "kanji": "転倒",
+                    "kana": "てんとう",
+                    "arti": "jatuh"
+                },
+                {
+                    "kanji": "ナースコール",
+                    "kana": "なーすこーる",
+                    "arti": "panggilan perawat"
+                },
+                {
+                    "kanji": "日勤",
+                    "kana": "にっきん",
+                    "arti": "shift siang"
+                },
+                {
+                    "kanji": "濡れる",
+                    "kana": "ぬれる",
+                    "arti": "basah"
+                },
+                {
+                    "kanji": "吐く",
+                    "kana": "はく",
+                    "arti": "muntah"
+                },
+                {
+                    "kanji": "外す",
+                    "kana": "はずす",
+                    "arti": "melepaskan"
+                },
+                {
+                    "kanji": "非常ベル",
+                    "kana": "ひじょうべる",
+                    "arti": "bel darurat"
+                },
+                {
+                    "kanji": "119 番",
+                    "kana": "いちいちきゅうばん",
+                    "arti": "nomor darurat (119)"
+                },
+                {
+                    "kanji": "服薬",
+                    "kana": "ふくやく",
+                    "arti": "minum obat"
+                },
+                {
+                    "kanji": "報告",
+                    "kana": "ほうこく",
+                    "arti": "laporan"
+                },
+                {
+                    "kanji": "ホール",
+                    "kana": "ほーる",
+                    "arti": "ruang (seperti aula)"
+                },
+                {
+                    "kanji": "まつり",
+                    "kana": "まつり",
+                    "arti": "festival"
+                },
+                {
+                    "kanji": "ミーティング",
+                    "kana": "みーてぃんぐ",
+                    "arti": "pertemuan"
+                },
+                {
+                    "kanji": "見守り",
+                    "kana": "みまもり",
+                    "arti": "pengawasan"
+                },
+                {
+                    "kanji": "面会",
+                    "kana": "めんかい",
+                    "arti": "kunjungan"
+                },
+                {
+                    "kanji": "申し送り",
+                    "kana": "もうしおくり",
+                    "arti": "penyampaian informasi (misalnya antar shift)"
+                },
+                {
+                    "kanji": "夜勤",
+                    "kana": "やきん",
+                    "arti": "shift malam"
+                },
+                {
+                    "kanji": "流行",
+                    "kana": "りゅうこう",
+                    "arti": "epidemi, tren"
+                },
+                {
+                    "kanji": "利用者",
+                    "kana": "りようしゃ",
+                    "arti": "pengguna, klien"
+                }
+            ]
+        }
+        
+        
+        
+        
+        
+        
+    ]
+}

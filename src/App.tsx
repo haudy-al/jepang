@@ -36,6 +36,7 @@ import ForumDetailPage from './components/ForumDetailPage';
 import UjianPage from './pages/UjianPage';
 import ViewUjian from './components/ViewUjian';
 import Kotoba from './pages/Kotoba';
+import FlashcardKaigo from './pages/FlashcardKaigo';
 
 
 setupIonicReact();
@@ -48,12 +49,13 @@ const App: React.FC = () => {
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/login" component={LoginPage} exact />
           <Route path="/home" component={HomePage} exact />
+          <Route path="/flashcard-kaigo" component={FlashcardKaigo} exact />
           <PrivateRoute path="/search" component={ViewSearch} exact />
-          <PrivateRoute path="/kotoba" component={Kotoba} exact />
-          <PrivateRoute path="/leaderboard" component={Leaderboard} exact />
-          <PrivateRoute path="/kanji" component={ViewKanji} exact />
-          <PrivateRoute path="/kanji/:grade" component={GradeKanji} exact />
-          <PrivateRoute path="/kanji/:grade/:kanji" component={ShowKanji} exact />
+          <Route path="/kotoba" component={Kotoba} exact />
+          <Route path="/leaderboard" component={Leaderboard} exact />
+          <Route path="/kanji" component={ViewKanji} exact />
+          <Route path="/kanji/:grade" component={GradeKanji} exact />
+          <Route path="/kanji/:grade/:kanji" component={ShowKanji} exact />
           <PrivateRoute path="/forum" component={ViewForum} exact />
           <PrivateRoute path="/forum/:id" component={ForumDetailPage} exact />
           <PrivateRoute path="/ujian" component={UjianPage} exact />

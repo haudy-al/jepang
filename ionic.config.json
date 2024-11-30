@@ -7,7 +7,7 @@
   "id": "bd2fce31",
   "proxies": [
     {
-      "path": "/api",
+      "path": "/api1",
       "proxyUrl": "https://api.haudy.my.id"
     },
     {

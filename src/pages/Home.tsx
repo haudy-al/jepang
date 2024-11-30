@@ -11,6 +11,7 @@ import {
   IonRefresherContent,
   IonRouterLink,
   IonThumbnail,
+  IonToast,
 } from '@ionic/react';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 
@@ -44,6 +45,9 @@ const HomePage: React.FC = () => {
   const history = useHistory();
   const [isActive, setIsActive] = useState(false);
 
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>('');
+
   function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
     setTimeout(() => {
       // Any calls to load data go here
@@ -69,6 +73,11 @@ const HomePage: React.FC = () => {
     }
     setItems([...items, ...newItems]);
   };
+
+  const belomKelar = () => {
+    setToastMessage('Fitur Belum Jadi. Developer nya pemalas');
+    setShowToast(true);
+  }
 
   useEffect(() => {
     generateItems();
@@ -96,7 +105,7 @@ const HomePage: React.FC = () => {
           </IonRefresher>
           <SwiperBanner></SwiperBanner>
 
-          
+
 
           <IonCard>
             <IonGrid>
@@ -120,6 +129,7 @@ const HomePage: React.FC = () => {
                   </a>
                 </IonCol>
 
+
                 {/* <IonCol className="menu-item" onClick={() => history.push('/ujian')}>
                   <a className="custom-button-menu" href="">
                     <img className="custom-icon-menu" src={logo_toa}></img>
@@ -127,6 +137,14 @@ const HomePage: React.FC = () => {
                   </a>
                 </IonCol> */}
 
+              </IonRow>
+              <IonRow>
+                <IonCol className="menu-item" onClick={() => history.push('/flashcard-kaigo')}>
+                  <a className="custom-button-menu" href="">
+                    <img className="custom-icon-menu" src={logo_kotoba}></img>
+                    <p>Flashcard Kaigo</p>
+                  </a>
+                </IonCol>
               </IonRow>
             </IonGrid>
           </IonCard>
@@ -159,25 +177,30 @@ const HomePage: React.FC = () => {
 
           <IonCard>
             <div className='custom-button-container'>
-              <button className='custom-button-selengkapnya' onClick={() => history.push('/forum')}>Selengkapnya</button>
+              <button className='custom-button-selengkapnya' onClick={() => belomKelar}>Selengkapnya</button>
             </div>
             <IonList>
-              <IonItem onClick={() => history.push('/kanji')}>
-                
-                <IonLabel>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur sint </IonLabel>
+              <IonItem onClick={() => belomKelar}>
+
+                <IonLabel>Hallo Para Kesatria JFT </IonLabel>
                 <span slot='end'><IonIcon icon={repeatOutline}></IonIcon> 2</span>
               </IonItem>
 
               <IonItem>
-                
-                <IonLabel>Item</IonLabel>
+
+                <IonLabel>Yoooo hooooo...</IonLabel>
                 <span slot='end'><IonIcon icon={repeatOutline}></IonIcon> 1</span>
               </IonItem>
             </IonList>
           </IonCard>
 
 
-
+          <IonToast
+            isOpen={showToast}
+            onDidDismiss={() => setShowToast(false)}
+            message={toastMessage}
+            duration={2000}
+          ></IonToast>
 
         </IonContent>
         <Footer></Footer>

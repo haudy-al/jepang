@@ -1,0 +1,172 @@
+.flashcard {
+    width: 300px; /* Ukuran lebar card */
+    height: 400px; /* Ukuran tinggi card */
+    margin: 20px auto;
+    perspective: 1500px; /* Lebih besar untuk pengaruh 3D yang lebih halus */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform; /* Menandakan bahwa transformasi flashcard yang akan sering berubah */
+  }
+  
+  .flashcard-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d; /* Menyimpan transformasi 3D */
+    transition: transform 0.6s ease-in-out; /* Animasi rotasi */
+  }
+  
+  .flashcard .front,
+  .flashcard .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden; /* Menyembunyikan sisi belakang saat berputar */
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    overflow: hidden; /* Menyembunyikan konten yang melebihi batas */
+  }
+  
+  .flashcard .front {
+    background: linear-gradient(145deg, #2a2a3e, #1e1e2f);
+    color: #ffffff;
+    font-size: 5vw; /* Ukuran font menyesuaikan dengan lebar card */
+    font-weight: bold;
+    text-align: center;
+    transform: rotateY(0deg); /* Posisi awal depan */
+    padding: 10px;
+    white-space: nowrap; /* Mencegah teks membungkus ke baris kedua */
+    text-overflow: ellipsis; /* Menambahkan titik tiga jika teks terlalu panjang */
+  }
+  
+  .flashcard .back {
+    background: linear-gradient(145deg, #1e1e2f, #2a2a3e);
+    color: #ffffff;
+    font-size: 1.2rem;
+    text-align: center;
+    transform: rotateY(180deg); /* Sisi belakang tersembunyi */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Menyusun secara vertikal */
+    align-items: center;
+    word-break: break-word; /* Menjaga agar teks tidak keluar */
+    white-space: nowrap; /* Mencegah teks membungkus ke baris kedua */
+    overflow: hidden; /* Menyembunyikan teks yang berlebih */
+  }
+  
+  /* Flashcard flipped */
+  .flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg); /* Rotasi flashcard saat dibalik */
+  }
+  
+  /* Penyesuaian tampilan untuk teks di dalam flashcard */
+  .flashcard .back .kana,
+  .flashcard .back .arti {
+    margin: 5px 0; /* Memberikan jarak antara cara baca dan arti */
+    font-size: 1.5rem;
+  }
+  
+  .flashcard .back .kana {
+    font-weight: bold;
+  }
+  
+  .flashcard .back .arti {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  
+  /* Memastikan teks tetap tajam selama animasi */
+  .flashcard .front h1,
+  .flashcard .back .kana,
+  .flashcard .back .arti {
+    will-change: transform;
+    text-shadow: none; /* Menghilangkan shadow yang mungkin menyebabkan blur */
+  }
+  
+  .flashcard .back {
+    filter: none; /* Menjaga flashcard tetap tajam */
+  }
+  
+  /* Mengoptimalkan rendering font */
+  .flashcard .front,
+  .flashcard .back {
+    -webkit-font-smoothing: antialiased; /* Meningkatkan kejelasan font di webkit browsers */
+    text-rendering: optimizeLegibility; /* Mengoptimalkan pembacaan font */
+  }
+  
+  /* Media query untuk mengatur font sesuai ukuran layar */
+  @media (max-width: 480px) {
+    .flashcard .front {
+      font-size: 8vw; /* Ukuran font lebih kecil pada layar kecil */
+    }
+  
+    .flashcard .back .kana {
+      font-size: 1.3rem;
+    }
+  
+    .flashcard .back .arti {
+      font-size: 1rem;
+    }
+  }
+  
+  .flashcard-buttons {
+    display: flex;
+    justify-content: space-between; /* Membuat tombol berjejer kiri-kanan */
+    margin-top: 20px; /* Memberikan jarak atas antara tombol dan flashcard */
+  }
+  
+  .flashcard-buttons .ion-button {
+    flex: 1; /* Membuat tombol menggunakan ruang yang sama */
+    margin: 0 10px; /* Memberikan jarak antara tombol */
+  }
+  
+  .change-category-button {
+    margin-top: 20px;
+  }
+
+  /* Styling IonCheckbox dan IonLabel */
+ion-checkbox {
+    margin-right: 8px;
+    --size: 24px; /* Ukuran checkbox yang lebih besar */
+  }
+  
+  ion-label {
+    font-size: 16px;
+    color: #333; /* Warna teks label */
+    line-height: 1.5;
+    display: inline-block;
+  }
+  
+  /* Grid dan tampilan kategori */
+  ion-grid {
+    margin-top: 20px;
+  }
+  
+  ion-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+  
+  ion-col {
+    padding: 10px;
+  }
+  
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling tombol Start */
+  ion-button[expand="full"] {
+    margin-top: 20px;
+  }
+  
+  

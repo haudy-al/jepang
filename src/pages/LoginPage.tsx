@@ -22,10 +22,10 @@ const LoginPage: React.FC = () => {
     const GoogleLogin = async () => {
         try {
             const googleUser = await GoogleAuth.signIn();
-           
+
             HandleGoogleLogin(googleUser);
 
-           
+
         } catch (error) {
             const errorMessage = (error as Error).message;
             setToastMessage(`E1 ${errorMessage}`);
@@ -34,21 +34,32 @@ const LoginPage: React.FC = () => {
         }
     };
 
+    const getCsrfCookie = async () => {
+        await axios.get('https://api.haudy.my.id/sanctum/csrf-cookie', {
+            withCredentials: true
+        });
+    };
+
     const HandleGoogleLogin = async (googleUser: any) => {
 
         try {
+
+            await getCsrfCookie();
+
             const response = await axios.post('https://api.haudy.my.id/api/auth/google', {
                 email: googleUser.email,
                 name: googleUser.name,
                 image: googleUser.imageUrl,
             }, {
                 headers: {
-                    'x-api-key': 'dewa'
-                }
+                    'x-api-key': 'dewa',
+                    
+                },
+                withCredentials: true 
             });
 
             console.log(googleUser);
-            
+
 
             if (response.data && response.data.token) {
                 localStorage.setItem('jwtToken', response.data.token);
@@ -56,11 +67,11 @@ const LoginPage: React.FC = () => {
                 // console.log(JSON.parse(`${localStorage.getItem('userData')}`));
 
                 console.log(response.data);
-                
+
                 setToastMessage('Login berhasil');
                 setShowToast(true);
                 setTimeout(() => {
-                    window.location.href = '/home';
+                    history.push('/');
                 }, 1000);
             }
         } catch (error: any) {
