@@ -1,22 +1,37 @@
 import React, { useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonGrid, IonRow, IonCol, IonCheckbox, IonLabel, IonText } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonGrid, IonRow, IonCol, IonCheckbox, IonLabel, IonToggle, IonIcon } from '@ionic/react';
 import Flashcard from '../components/Flashcard'; // Import komponen Flashcard
 import data from '../kotobakaigo.json'; // Import data JSON
 
+
 const FlashcardKaigo: React.FC = () => {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // Untuk menyimpan kategori yang dipilih
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [flashcards, setFlashcards] = useState<Array<{ kanji: string, kana: string, arti: string }> | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isShuffle, setIsShuffle] = useState<boolean>(false);
+
+  // Fungsi untuk mengacak flashcard secara langsung
+  const getRandomIndex = () => {
+    if (flashcards) {
+      return Math.floor(Math.random() * flashcards.length);
+    }
+    return 0;
+  };
 
   // Handle perubahan kategori
   const handleCategoryChange = (categoryName: string) => {
     setSelectedCategories((prevSelectedCategories) => {
       if (prevSelectedCategories.includes(categoryName)) {
-        return prevSelectedCategories.filter((category) => category !== categoryName); // Menghapus kategori
+        return prevSelectedCategories.filter((category) => category !== categoryName);
       } else {
-        return [...prevSelectedCategories, categoryName]; // Menambahkan kategori
+        return [...prevSelectedCategories, categoryName];
       }
     });
+  };
+
+  // Handle toggle acak kotoba
+  const handleShuffleToggle = (event: CustomEvent) => {
+    setIsShuffle(event.detail.checked);
   };
 
   // Handle tombol Start
@@ -29,30 +44,22 @@ const FlashcardKaigo: React.FC = () => {
       }
     });
 
-    setFlashcards(selectedFlashcards); // Menetapkan flashcards yang digabungkan
-    setCurrentIndex(0); // Reset ke flashcard pertama
+    setFlashcards(selectedFlashcards);
+    setCurrentIndex(0); // Mulai dari indeks pertama
   };
 
-  // Handle tombol "Next" dengan infinite loop
+  // Handle tombol "Next"
   const handleNextFlashcard = () => {
     if (flashcards) {
-      const nextIndex = (currentIndex + 1) % flashcards.length;
+      const nextIndex = isShuffle ? getRandomIndex() : (currentIndex + 1) % flashcards.length;
       setCurrentIndex(nextIndex);
-    }
-  };
-
-  // Handle tombol "Back" dengan infinite loop
-  const handleBackFlashcard = () => {
-    if (flashcards) {
-      const prevIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
-      setCurrentIndex(prevIndex);
     }
   };
 
   // Handle ganti kategori
   const handleChangeCategory = () => {
-    setSelectedCategories([]); // Reset kategori yang dipilih
-    setFlashcards(null); // Reset flashcards
+    setSelectedCategories([]);
+    setFlashcards(null);
   };
 
   return (
@@ -60,7 +67,7 @@ const FlashcardKaigo: React.FC = () => {
       <IonHeader className='custom-header'>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" /> {/* Tombol kembali ke halaman utama */}
+            <IonBackButton defaultHref="/" />
           </IonButtons>
           <IonTitle>Flashcard Kaigo</IonTitle>
         </IonToolbar>
@@ -68,7 +75,6 @@ const FlashcardKaigo: React.FC = () => {
 
       <IonContent className="ion-padding">
         {!flashcards ? (
-          // Jika flashcards belum ditampilkan, tampilkan pilihan kategori
           <div>
             <h2>Pilih Kategori:</h2>
             <IonGrid>
@@ -84,13 +90,21 @@ const FlashcardKaigo: React.FC = () => {
                 ))}
               </IonRow>
             </IonGrid>
+
+            {/* Toggle untuk Acak Kotoba */}
+            <IonRow className="ion-margin-top">
+              <IonCol size="12">
+                <IonLabel>Acak Kotoba</IonLabel>
+                <IonToggle checked={isShuffle} onIonChange={handleShuffleToggle} />
+              </IonCol>
+            </IonRow>
+
             <IonButton expand="full" onClick={handleStart} disabled={selectedCategories.length === 0} color="success">
               Start
             </IonButton>
           </div>
         ) : (
           <div>
-            {/* Menampilkan flashcard berdasarkan indeks */}
             {flashcards && flashcards.length > 0 ? (
               <div>
                 <Flashcard
@@ -99,19 +113,27 @@ const FlashcardKaigo: React.FC = () => {
                   arti={flashcards[currentIndex].arti}
                 />
 
-                {/* Tombol Back dan Next berjejer */}
+                {/* Tombol hanya Next jika mode Acak aktif */}
                 <div className="flashcard-buttons">
-                  <IonButton expand="full" onClick={handleBackFlashcard}>
-                    Sebelumnya
-                  </IonButton>
-                  <IonButton expand="full" onClick={handleNextFlashcard}>
-                    Selanjutnya
-                  </IonButton>
+                  {isShuffle ? (
+                    <IonButton color={'medium'} expand="full" onClick={handleNextFlashcard}>
+                      Selanjutnya 
+                    </IonButton>
+                  ) : (
+                    <>
+                      <IonButton color={'medium'} expand="full" onClick={() => setCurrentIndex((currentIndex - 1 + flashcards.length) % flashcards.length)}>
+                        Sebelumnya
+                      </IonButton>
+                      <IonButton color={'medium'} expand="full" onClick={handleNextFlashcard}>
+                        Selanjutnya
+                      </IonButton>
+                    </>
+                  )}
                 </div>
 
                 {/* Tombol Ganti Kategori */}
                 <div className="change-category-button">
-                  <IonButton expand="full" onClick={handleChangeCategory}>
+                  <IonButton color={'danger'} expand="full" onClick={handleChangeCategory}>
                     Ganti Kategori
                   </IonButton>
                 </div>
